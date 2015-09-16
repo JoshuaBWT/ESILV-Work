@@ -1,3 +1,6 @@
+# Ouvrir Results.html pour voir l'affichage des tp
+# Chaque exercice est disponible dans son dossier au format JS.
+
 # JAVASCRIPT WORLD DOMINATION
 
 ## Intro
