@@ -1,0 +1,6 @@
+C:\Users\Joshua BWT\Desktop\Cours ESILV\Traitement de l'information multimédia\RGBDecoder\RGBDecoder\bin\Debug\RGBDecoder.exe.config
+C:\Users\Joshua BWT\Desktop\Cours ESILV\Traitement de l'information multimédia\RGBDecoder\RGBDecoder\bin\Debug\RGBDecoder.exe
+C:\Users\Joshua BWT\Desktop\Cours ESILV\Traitement de l'information multimédia\RGBDecoder\RGBDecoder\bin\Debug\RGBDecoder.pdb
+C:\Users\Joshua BWT\Desktop\Cours ESILV\Traitement de l'information multimédia\RGBDecoder\RGBDecoder\obj\Debug\RGBDecoder.csprojResolveAssemblyReference.cache
+C:\Users\Joshua BWT\Desktop\Cours ESILV\Traitement de l'information multimédia\RGBDecoder\RGBDecoder\obj\Debug\RGBDecoder.exe
+C:\Users\Joshua BWT\Desktop\Cours ESILV\Traitement de l'information multimédia\RGBDecoder\RGBDecoder\obj\Debug\RGBDecoder.pdb
