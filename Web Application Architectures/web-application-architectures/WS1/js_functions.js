@@ -1,7 +1,10 @@
-var writtenContent = "";
+var writtenContent =  "<div class=\"ex\">"+
+  "<h1>WS1 javascript</h1>"+
+  "</div>";
 
 function writeOnPage()
 {
+
     document.getElementById("resultsTag").innerHTML = writtenContent;
 }
 
@@ -110,7 +113,7 @@ result.prototype.compare = function(total2)
       writtenContent += "id client:" + this.clients[i].id + " : " + (total2.clients[i].pricePayed - this.clients[i].pricePayed) +
       "€ (of which " + (total2.clients[i].deductibleReduction - this.clients[i].deductibleReduction) + "€ of reduction)<br/>";
   }
-  writtenContent += "<br/>";
+  writtenContent += "";
 }
 
 function getAllDataEx5andEx6(total, car)

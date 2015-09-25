@@ -57,7 +57,7 @@ function ex5()
     };
 
       //functions in js_functions.js
-      writtenContent +="<div class=\"ex\">====================EX5====================<br/>";
+      writtenContent += "<div class=\"ex\"><h3>EX5</h3><div class=\"exContent\">";
       var car = json.cars[0];
       var rentals = json.rentals;
 
@@ -72,5 +72,5 @@ function ex5()
 
       total.display();
 
-      writtenContent +="===========================================<br/><br/></div>";
+      writtenContent +="<br/></div></div>";
 }

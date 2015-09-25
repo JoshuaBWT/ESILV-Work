@@ -58,7 +58,7 @@ function ex1()
     ]
   };
 
-  writtenContent += "<div class=\"ex\">====================EX1====================<br/>";
+  writtenContent += "<div class=\"ex\"><h3>EX1</h3><div class=\"exContent\"><br/>";
 
   function result(idP, price) {
      this.idP = idP;
@@ -93,5 +93,5 @@ function ex1()
     results[i].speak();
   }
 
-  writtenContent +="<br/>===========================================<br/><br/></div>";
+  writtenContent +="<br/></div></div>";
 }

@@ -49,7 +49,7 @@ function ex2()
     }
 
     //functions in js_functions.js
-    writtenContent += "<div class=\"ex\">====================EX2====================<br/>";
+    writtenContent += "<div class=\"ex\"><h3>EX2</h3><div class=\"exContent\">";
 
     var car = json.cars[0];
     var rentals = json.rentals;
@@ -62,5 +62,5 @@ function ex2()
       writtenContent +="id client: " + rentals[i].id + " = " + price + "€</br>";
     }
 
-    writtenContent +="<br/>===========================================<br/><br/></div>";
+    writtenContent +="<br/></div></div>";
 }

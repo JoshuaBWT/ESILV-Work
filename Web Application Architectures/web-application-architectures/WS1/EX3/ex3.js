@@ -48,7 +48,7 @@ function ex3()
   };
 
   //functions in js_functions.js
-  writtenContent +="<div class=\"ex\">====================EX3====================<br/>";
+  writtenContent += "<div class=\"ex\"><h3>EX3</h3><div class=\"exContent\">";
 
   var car = json.cars[0];
   var rentals = json.rentals;
@@ -68,8 +68,8 @@ function ex3()
     writtenContent +="prix payé : " + pricePayed + "€<br/>";
     writtenContent +="prix insurance : " + commission + "€<br/>";
     writtenContent +="prix road A : " + roadA + "€<br/>";
-    writtenContent +="paiement drivy : " + drivy + "€<br/><br/>";
+    writtenContent +="paiement drivy : " + drivy + "€<br/>";
   }
 
-  writtenContent +="===========================================<br/></br/></div>";
+  writtenContent +="<br/></div></div>";
 }

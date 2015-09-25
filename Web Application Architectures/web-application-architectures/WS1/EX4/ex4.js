@@ -57,7 +57,7 @@ function ex4()
     };
 
       //functions in js_functions.js
-      writtenContent +="<div class=\"ex\">====================EX4====================<br/>";
+      writtenContent += "<div class=\"ex\"><h3>EX4</h3><div class=\"exContent\">";
       var car = json.cars[0];
       var rentals = json.rentals;
 
@@ -84,7 +84,7 @@ function ex4()
         writtenContent +="prix insurance : " + insurance + "€<br/>";
         writtenContent +="prix road A : " + roadA + "€<br/>";
         writtenContent +="paiement drivy : " + drivy + "€<br/>";
-        writtenContent +="paiement reduction : " + deductibleReduction + "€<br/><br/>";
+        writtenContent +="paiement reduction : " + deductibleReduction + "€<br/>";
       }
-      writtenContent +="===========================================<br/><br/></div>";
+      writtenContent +="<br/></div></div>";
 }

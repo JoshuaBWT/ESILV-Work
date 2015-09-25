@@ -1,0 +1,44 @@
+body
+{
+  background: rgb(210,210,210);
+}
+
+.mainTag {
+  font-style: oblique;
+  font-weight:lighter;
+  font-family: Segoe UI;
+  width:auto;
+  length: auto;
+  color: rgb(100,100,100);
+  width:20%;
+  margin-left: 1%;
+
+}
+.ex
+{
+  padding:10px;
+  margin-bottom: 10px;
+  background: rgb(240,240,240);
+  text-align: center;
+}
+
+.ex:hover .exContent
+{
+  opacity:1;
+  height:auto;
+}
+
+.exContent
+{
+  top:1%;
+  left:30%;
+  opacity:0;
+  height:0;
+  overflow: hidden;
+  border: none;
+  box-shadow: 5px 5px 5px rgb(200,200,200);;
+  transition: all .3s ease .15s;
+  position:fixed;
+  background: rgb(230,230,230);
+  width:600px;
+}

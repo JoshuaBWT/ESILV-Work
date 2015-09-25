@@ -70,7 +70,7 @@ function ex6()
     };
 
       //functions in js_functions.js
-      writtenContent +="<div class=\"ex\">====================EX6====================<br/>";
+      writtenContent += "<div class=\"ex\"><h3>EX6</h3><div class=\"exContent\">";
       var car = json.cars[0];
       var rentals = json.rentals;
       var modifications = json.rentalModifications;
@@ -115,5 +115,5 @@ function ex6()
 
       total.compare(total2);
 
-      writtenContent +="===========================================<br/><br/></div>";
+      writtenContent +="<br/></div></div>";
 }
