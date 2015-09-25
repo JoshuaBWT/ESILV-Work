@@ -58,7 +58,7 @@ function ex1()
     ]
   };
 
-  writtenContent += "<div class=\"ex\"><h3>EX1</h3><div class=\"exContent\"><br/>";
+  writtenContent += "<div class=\"ex\" tabindex=\"0\"><h3>EX1</h3><div class=\"exContent\"><br/>";
 
   function result(idP, price) {
      this.idP = idP;
@@ -67,7 +67,7 @@ function ex1()
 
   result.prototype.speak = function()
   {
-      writtenContent +="id Client : " +this.idP + " = " + this.price + "€<br/>";
+      writtenContent +="id Client : " +this.idP + " = " + this.price + "€<br/><br/>";
   }
 
   var results = Array();
@@ -82,7 +82,7 @@ function ex1()
           var date1 = new Date(rental.rentals[i].pickupDate);
           var date2 = new Date(rental.rentals[i].returnDate);
           var nbrOfDays = (date2.getTime() - date1.getTime())/ONE_DAY + 1;
-          var payed = rental.cars[j].pricePerKm * rental.rentals[i].distance + nbrOfDays * rental.cars[j].pricePerDay;
+          var payed = rnd(rental.cars[j].pricePerKm * rental.rentals[i].distance + nbrOfDays * rental.cars[j].pricePerDay);
           results[i] = new result(rental.rentals[i].id, payed);
         }
     }
@@ -93,5 +93,5 @@ function ex1()
     results[i].speak();
   }
 
-  writtenContent +="<br/></div></div>";
+  writtenContent +="</div></div>";
 }

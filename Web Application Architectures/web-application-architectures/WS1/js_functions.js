@@ -1,5 +1,6 @@
 var writtenContent =  "<div class=\"ex\">"+
-  "<h1>WS1 javascript</h1>"+
+  "<h1>WS1.JavaScript</h1>" +
+  "(mouseover to look, click to lock)"+
   "</div>";
 
 function writeOnPage()
@@ -7,6 +8,12 @@ function writeOnPage()
 
     document.getElementById("resultsTag").innerHTML = writtenContent;
 }
+
+function rnd(num)
+{
+  return Math.round(num * 100) / 100;
+}
+
 
 function getNbrOfDays(p, r)
 {
@@ -89,29 +96,29 @@ result.prototype.clone = function()
 
 result.prototype.display = function()
 {
-  writtenContent += "total owner : " + this.owner + "€<br/>";
-  writtenContent += "total insurance : " + this.insurance + "€<br/>";
-  writtenContent += "total assistance : " + this.assistance + "€<br/>";
-  writtenContent += "total drivy : " + this.drivy + "€<br/>";
-  writtenContent += "clients:<br/>";
+  writtenContent += "total <b>owner</b> : " + this.owner + "€<br/>";
+  writtenContent += "total <b>insurance</b> : " + this.insurance + "€<br/>";
+  writtenContent += "total <b>assistance</b> : " + this.assistance + "€<br/>";
+  writtenContent += "total <b>drivy</b> : " + this.drivy + "€<br/><br/>";
+  writtenContent += "<b>clients:</b><br/>";
   for(var i = 0; i < this.clients.length; i++)
   {
-      writtenContent += "id client:" + this.clients[i].id + " : " + this.clients[i].pricePayed + "€ (of which " + this.clients[i].deductibleReduction + "€ of reduction)<br/>";
+      writtenContent += "<b>id client:" + this.clients[i].id + "</b> : " + this.clients[i].pricePayed + "€ (of which " + this.clients[i].deductibleReduction + "€ of reduction)<br/>";
   }
   writtenContent += "<br/>";
 };
 
 result.prototype.compare = function(total2)
 {
-  writtenContent += "difference owner : " + (total2.owner - this.owner) + "€<br/>";
-  writtenContent += "difference insurance : " + (total2.insurance - this.insurance) + "€<br/>";
-  writtenContent += "difference assistance : " + (total2.assistance - this.assistance)  + "€<br/>";
-  writtenContent += "difference drivy : " + (total2.drivy - this.drivy) + "€<br/>";
-  writtenContent += "clients:<br/>";
+  writtenContent += "difference <b>owner</b> : " + rnd(total2.owner - this.owner) + "€<br/>";
+  writtenContent += "difference <b>insurance</b> : " + rnd(total2.insurance - this.insurance) + "€<br/>";
+  writtenContent += "difference <b>assistance</b> : " + rnd(total2.assistance - this.assistance)  + "€<br/>";
+  writtenContent += "difference <b>drivy</b> : " +rnd (total2.drivy - this.drivy) + "€<br/><br/>";
+  writtenContent += "<b>clients:</b><br/>";
   for(var i = 0; i < this.clients.length; i++)
   {
-      writtenContent += "id client:" + this.clients[i].id + " : " + (total2.clients[i].pricePayed - this.clients[i].pricePayed) +
-      "€ (of which " + (total2.clients[i].deductibleReduction - this.clients[i].deductibleReduction) + "€ of reduction)<br/>";
+      writtenContent += "<b>id client:" + this.clients[i].id + "</b> : " + rnd(total2.clients[i].pricePayed - this.clients[i].pricePayed) +
+      "€ (of which " + rnd(total2.clients[i].deductibleReduction - this.clients[i].deductibleReduction) + "€ of reduction)<br/>";
   }
   writtenContent += "";
 }
@@ -128,11 +135,11 @@ function getAllDataEx5andEx6(total, car)
     if(total.clients[i].isReduction)
       deductibleReduction = 4 * nbrOfDays;
 
-    var owner = 0.7 * pricePayed;
-    var commission = 0.3 * pricePayed;
-    var insurance = commission * 0.5;
-    var roadA = nbrOfDays * 1;
-    var drivy = commission - insurance - roadA;
+    var owner = rnd(0.7 * pricePayed);
+    var commission = rnd(0.3 * pricePayed);
+    var insurance = rnd(commission * 0.5);
+    var roadA = rnd(nbrOfDays * 1);
+    var drivy = rnd(commission - insurance - roadA);
 
     pricePayed += deductibleReduction;
     drivy += deductibleReduction;

@@ -49,7 +49,7 @@ function ex2()
     }
 
     //functions in js_functions.js
-    writtenContent += "<div class=\"ex\"><h3>EX2</h3><div class=\"exContent\">";
+    writtenContent += "<div class=\"ex\" tabindex=\"0\"><h3>EX2</h3><div class=\"exContent\"><br/>";
 
     var car = json.cars[0];
     var rentals = json.rentals;
@@ -58,9 +58,9 @@ function ex2()
     {
       var price = rentals[i].distance * car.pricePerKm;
       var nbrOfDays = getNbrOfDays(rentals[i].pickupDate, rentals[i].returnDate);
-      price = price + getPriceFromDays(nbrOfDays, car.pricePerDay);
-      writtenContent +="id client: " + rentals[i].id + " = " + price + "€</br>";
+      price = rnd(price + getPriceFromDays(nbrOfDays, car.pricePerDay));
+      writtenContent +="id client: " + rentals[i].id + " = " + price + "€</br><br/>";
     }
 
-    writtenContent +="<br/></div></div>";
+    writtenContent +="</div></div>";
 }

@@ -57,7 +57,7 @@ function ex4()
     };
 
       //functions in js_functions.js
-      writtenContent += "<div class=\"ex\"><h3>EX4</h3><div class=\"exContent\">";
+      writtenContent += "<div class=\"ex\" tabindex=\"0\"><h3>EX4</h3><div class=\"exContent\"><br/>";
       var car = json.cars[0];
       var rentals = json.rentals;
 
@@ -71,20 +71,20 @@ function ex4()
         if(rentals[i].options.deductibleReduction)
           deductibleReduction = 4 * nbrOfDays;
 
-        var commission = 0.3 * pricePayed;
-        var insurance = commission * 0.5;
-        var roadA = nbrOfDays * 1;
-        var drivy = commission - insurance - roadA;
+        var commission = rnd(0.3 * pricePayed);
+        var insurance = rnd(commission * 0.5);
+        var roadA = rnd(nbrOfDays * 1);
+        var drivy = rnd(commission - insurance - roadA);
 
         pricePayed += deductibleReduction;
         drivy += deductibleReduction;
 
-        writtenContent +="id client : " + rentals[i].id + "<br/>";
+        writtenContent +="<b>id client : " + rentals[i].id + "</b><br/>";
         writtenContent +="prix payé : " + pricePayed + "€<br/>";
         writtenContent +="prix insurance : " + insurance + "€<br/>";
         writtenContent +="prix road A : " + roadA + "€<br/>";
         writtenContent +="paiement drivy : " + drivy + "€<br/>";
-        writtenContent +="paiement reduction : " + deductibleReduction + "€<br/>";
+        writtenContent +="paiement reduction : " + deductibleReduction + "€<br/><br/>";
       }
-      writtenContent +="<br/></div></div>";
+      writtenContent +="</div></div>";
 }

@@ -48,7 +48,7 @@ function ex3()
   };
 
   //functions in js_functions.js
-  writtenContent += "<div class=\"ex\"><h3>EX3</h3><div class=\"exContent\">";
+  writtenContent += "<div class=\"ex\" tabindex=\"0\"><h3>EX3</h3><div class=\"exContent\"><br/>";
 
   var car = json.cars[0];
   var rentals = json.rentals;
@@ -59,17 +59,17 @@ function ex3()
     var pricePayedForDate = getPriceFromDays(nbrOfDays, car.pricePerDay);
     var pricePayed = pricePayedForDate + car.pricePerKm*rentals[i].distance;
 
-    var commission = 0.3 * pricePayed;
-    var insurance = commission * 0.5;
-    var roadA = nbrOfDays * 1;
-    var drivy = commission - insurance - roadA;
+    var commission = rnd(0.3 * pricePayed);
+    var insurance = rnd(commission * 0.5);
+    var roadA = rnd(nbrOfDays * 1);
+    var drivy = rnd(commission - insurance - roadA);
 
-    writtenContent +="id client : " + rentals[i].id + "<br/>";
+    writtenContent +="<b>id client : " + rentals[i].id + "</b><br/>";
     writtenContent +="prix payé : " + pricePayed + "€<br/>";
     writtenContent +="prix insurance : " + commission + "€<br/>";
     writtenContent +="prix road A : " + roadA + "€<br/>";
-    writtenContent +="paiement drivy : " + drivy + "€<br/>";
+    writtenContent +="paiement drivy : " + drivy + "€<br/><br/>";
   }
 
-  writtenContent +="<br/></div></div>";
+  writtenContent +="</div></div>";
 }

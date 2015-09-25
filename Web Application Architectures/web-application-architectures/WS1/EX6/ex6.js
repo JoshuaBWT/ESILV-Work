@@ -70,7 +70,7 @@ function ex6()
     };
 
       //functions in js_functions.js
-      writtenContent += "<div class=\"ex\"><h3>EX6</h3><div class=\"exContent\">";
+      writtenContent += "<div class=\"ex\" tabindex=\"0\"><h3>EX6</h3><div class=\"exContent\"><br/>";
       var car = json.cars[0];
       var rentals = json.rentals;
       var modifications = json.rentalModifications;

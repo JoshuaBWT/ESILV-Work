@@ -22,11 +22,18 @@ body
   text-align: center;
 }
 
+.ex:focus .exContent
+{
+  opacity:1;
+  height:auto;
+}
+
 .ex:hover .exContent
 {
   opacity:1;
   height:auto;
 }
+
 
 .exContent
 {
@@ -40,5 +47,5 @@ body
   transition: all .3s ease .15s;
   position:fixed;
   background: rgb(230,230,230);
-  width:600px;
+  width:30%;
 }
