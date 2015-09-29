@@ -1,0 +1,55 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "le_bon_coin_offer",
+	"type": "object",
+	"properties": {
+		"url": {
+			"type" : "string"
+		},
+		"title": {
+			"type" : "string"
+		},
+		"date": {
+			"type" : "Date"
+		},
+		"seller": {
+			"type" : "object",
+			"properties": {
+				"name": {
+					"type" : "string"
+				},
+				"professional": {
+					"type" : "boolean"
+				},
+				"siren": {
+					"type" : "integer"
+				}
+			},
+			"required": ["name", "professional"]
+		},
+		"price": {
+			"type" : "integer"
+		},
+		"city": {
+			"type" : "string"
+		},
+		"postal_code": {
+			"type" : "string"
+		},
+		"brand": {
+			"type" : "string"
+		},
+		"model": {
+			"type": "string"
+		},
+		"mileage": {
+			"type": "integer"
+		},
+		"energy": {
+			"type" : "string"
+		}
+		"gearbox": {
+			"description": "string"
+		}
+	}
+}

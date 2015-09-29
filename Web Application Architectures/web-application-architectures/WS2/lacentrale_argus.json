@@ -1,0 +1,16 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "la_centrale_argus",
+	"type": "object",
+	"properties": {
+		"brand": {
+			"type" : "string"
+		},
+		"model": {
+			"type" : "string"
+		},
+		"year": {
+			"type" : "integer"
+		}
+	}		
+}

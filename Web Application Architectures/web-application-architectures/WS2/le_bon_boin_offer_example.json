@@ -1,0 +1,20 @@
+{
+	"url" : "www.urlurlurl.com",
+	"title" : "Lexus Machin",
+	"date" : "29/06/2015"
+	"seller" :
+				{	
+					"name" : "Mr Dupont",
+					"professional" : "true",
+					"siren" : "0987654323456789"
+				},
+	"price" : "20k€",
+	"city" : "Poissy",
+	"postal_code" : "78300",
+	"brand" : "Lexus",
+	"model" : "rx",
+	"mileage" : "180000",
+	"fuel" : "essence",
+	"gearbox" : "manual",
+	"description" : "lolololol hahahahah lemlemlemlem PSG"	
+}
