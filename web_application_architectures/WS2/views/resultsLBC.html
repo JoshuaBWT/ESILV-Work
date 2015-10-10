@@ -1,0 +1,20 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+  <meta charset="UTF-8">
+<TITLE>WS2 : Results</TITLE>
+<!--<script src="jquery-1.11.3.min.js"></script>-->
+<!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
+<!--
+    Page "view" pour l'affichage des resultats. cette page est juste chargée dans la page de base. Pas de redirection, le html est importé
+-->
+<script type="text/javascript">
+  var lbcJSON = <%- JSON.stringify(json) %>;
+</script>
+</HEAD>
+<BODY>
+<div id="resultsTag" class="mainTag">
+  <%- JSON.stringify(json) %>
+</BODY>
+</HTML>
