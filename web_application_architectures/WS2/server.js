@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var importJS = require('import_external_js');
 
 var leboncoin = require('leboncoin');
+var lacentrale = require('lacentrale');
 
 var utils = importJS("utils/utils.js");
 
@@ -28,7 +29,8 @@ app.get('/', function (req, res) {
 app.get('/reqUrl', function(req, res)
 {
    var url = req.query.url;
-   var newJson = Array();
+   var newJson = {};
+   var argusData = {};
    //Récupération du data sur leboncoin selon l'url
    var oldJson = leboncoin.scrapData(url, function(result)
    {
@@ -36,7 +38,8 @@ app.get('/reqUrl', function(req, res)
 
      //parse du json récupéré
      newJson = utils.convert_leboncoinJSON_into_appJSON(url, result);
-     console.log(newJson);
+     lacentrale.getRatings(newJson, function(){});
+
      //on fait un rendu de la page de resultats avec les données JSON de lbc dedans
      res.render('resultsLBC.html', {json: newJson});
    });
