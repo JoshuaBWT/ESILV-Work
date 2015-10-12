@@ -14,7 +14,17 @@
 </script>
 </HEAD>
 <BODY>
-<div id="resultsTag" class="mainTag">
-  <%- JSON.stringify(json) %>
+  <div id="resultsTag" class="mainTag">
+    <%- JSON.stringify(json) %>
+  </div>
+  <form method='POST' action='getUrl'>
+    <input type="hidden" name="url" value=<%= url %>/>
+    <select name="optionChoices">
+    <% for(var i=0; i<pages.length; i++) {%>
+       <option value=<%= pages[i].url %>><%= pages[i].name %></option>
+    <% } %>
+    <input type="submit" value="validez"/>
+    </select>
+  </form>
 </BODY>
 </HTML>
