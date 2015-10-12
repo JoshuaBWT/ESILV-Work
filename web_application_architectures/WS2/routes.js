@@ -1,5 +1,4 @@
 var path = require('path');
-var bodyParser = require('body-parser');
 var importJS = require('import_external_js');
 var utils = importJS("utils/utils.js");
 
@@ -26,15 +25,32 @@ module.exports = function(app)
      var argusData = {};
      var pages = Array();
 
-     findlbcJSON(url, lbcJSON, argusData, pages);
+     //findlbcJSON(res, url, lbcJSON, argusData, pages);
+
+     var oldJson = leboncoin.scrapData(url, function(result)
+     {
+       //console.log(result);
+
+       //parse du json récupéré
+       lbcJSON = utils.convert_leboncoinJSON_into_appJSON(url, result);
+       lacentrale.getRatings(lbcJSON, function(lacentraleresult)
+       {
+          pages = lacentraleresult;
+          res.render('resultsLBC.html', {url:url, json:lbcJSON, pages:pages});
+          //renderPage(res, url, lbcJSON, argusData, pages);
+       });
+     });
+
+
 
      //var newJson = utils.convert_leboncoinJSON_into_appJSON(url, oldJson);
      //console.log(newJson);
   });
 
-  function findlbcJSON(url, lbcJSON, argusData, pages)
+  function findlbcJSON(res, url, lbcJSON, argusData, pages)
   {
     //Récupération du data sur leboncoin selon l'url
+    /*
     var oldJson = leboncoin.scrapData(url, function(result)
     {
       //console.log(result);
@@ -45,15 +61,18 @@ module.exports = function(app)
       {
          pages = lacentraleresult;
          //res.render('resultsLBC.html', {url:url, json:lbcJSON, pages:pages});
-         renderPage();
+         renderPage(res, url, lbcJSON, argusData, pages);
       });
     });
+    */
   }
 
-  function renderPage(url, lbcJSON, argusData, pages)
+  /*
+  function renderPage(res, url, lbcJSON, argusData, pages)
   {
-    res.render('resultsLBC.html', {url:url, json:lbcJSON, pages:pages}));
+    res.render('resultsLBC.html', {url:url, json:lbcJSON, pages:pages});
   }
+  */
 
   app.get('/options', function(req, res)
   {
