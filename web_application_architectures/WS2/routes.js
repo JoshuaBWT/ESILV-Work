@@ -63,11 +63,10 @@ module.exports = function(app)
       var selectedOption = req.query.optionChoices;
       req.session.optionsPages.forEach(function(element, index, array)
       {
-        console.log("selectedOption : %s, (%s,%s)", selectedOption, element.name, element.url);
+        //console.log("Options : %s, (%s,%s)", selectedOption, element.name, element.url);
         if(element.name == selectedOption)
         {
             req.session.urlC = element.url;
-            console.log("here");
         }
       });
 
