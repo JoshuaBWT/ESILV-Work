@@ -1,5 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var session = require("express-session");
 var path = require('path');
 
 var app = express();
@@ -12,6 +14,12 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
+app.use(session({
+  secret: 'TheKeyOfTheDestinyOfSteevenLy',
+  resave: true,
+  saveUninitialized: true})
+);
 
 //gestion des formulaires dans le module routes
 require("./routes")(app);
@@ -21,5 +29,5 @@ var server = app.listen(3000, function () {
   var host = server.address().address;
   var port = server.address().port;
 
-  console.log('Example app listening at http://%s:%s', host, port);
+  console.log('Example app listening at http://localhost:%s', port);
 });

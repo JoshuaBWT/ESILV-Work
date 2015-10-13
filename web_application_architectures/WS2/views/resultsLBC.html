@@ -17,14 +17,23 @@
   <div id="resultsTag" class="mainTag">
     <%- JSON.stringify(json) %>
   </div>
-  <form method='POST' action='getUrl'>
+  <div>
+  <form method='GET' action='/'>
     <input type="hidden" name="url" value=<%= url %>/>
-    <select name="optionChoices">
-    <% for(var i=0; i<pages.length; i++) {%>
-       <option value=<%= pages[i].url %>><%= pages[i].name %></option>
-    <% } %>
+    <select name="optionChoices" onchange="this.form.submit()">
+    <% for(var i=0; i<optionsPages.length; i++) {
+        if(optionsPages[i].url == data.url) { %>
+       <option selected="selected" value="<%=optionsPages[i].name%>"><%= optionsPages[i].name %></option>
+       <% } else { %>
+       <option value="<%=optionsPages[i].name%>"><%= optionsPages[i].name %></option>
+    <% } }%>
     <input type="submit" value="validez"/>
     </select>
   </form>
+</div>
+<div id="results">
+  <p><%= data.cote %><p>
+  <img src=<%= data.graphdata %> width="484px" height="150px"/>
+</div>
 </BODY>
 </HTML>
