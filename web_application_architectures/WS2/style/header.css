@@ -12,6 +12,10 @@ body {
   background-color: #F4F5F6;
   display:block;
   font: 300 16px/1.4 'Open Sans';
+   min-width:1100px; /* suppose you want minimun width of 1000px */
+   width: auto !important;  /* Firefox will set width as auto */
+   width:1100px;             /* As IE ignores !important it will set width as 1000px; */
+
 }
 
 label {
@@ -19,27 +23,47 @@ label {
 }
 
 header.custom-header {
-  height: 210px;
+  height: 195px;
+  width: 100%;
+  margin: auto;
   background: #1EAAF1;
   box-shadow: 0 0 10px #1D92CD;
 }
 
 .linkLBC , .budget{
-  position: relative;
   display: inline-block;
-  margin-top: 15px;
+  margin-top: 10px;
+  position: relative;
+  width: 30%;
+}
+
+.linkLBC {
+  margin-left: 13%;
+}
+
+.budget {
+  margin-right: 13%;
+}
+
+.button-grid {
+  width: 10%;
+  margin: auto;
+  display: inline-block;
+  position: relative;
 }
 
 .custom-form        {
-  width: 65%;
-  margin: 0 auto;
+  width: 85%;
+  margin: auto;
 }
 
 .circle-searchButton {
-    width:80px;
-    height:80px;
+    width:70%;
+    height: auto;
+    display: block;
     border-radius: 50%;
     border-width: 0px;
+    margin: auto;
     color:black;
     text-align:center;
     text-decoration:none;
@@ -79,7 +103,7 @@ input         {
   background-color: #1EAAF1;
   color:white;
   font: 300 22px/1.4 'Open Sans';
-  width:350px;
+  width:90%;
   border:none;
   border-bottom:1px solid #56BFF4;
 }
@@ -107,7 +131,7 @@ input:focus ~ label, input:focus ~ label     {
 }
 
 /* BOTTOM BARS ================================= */
-.bar  { position:relative; display:block; width:365px; }
+.bar  { position:relative; display:block; width:95%; }
 .bar:before, .bar:after   {
 content:'';
 height:1px;
