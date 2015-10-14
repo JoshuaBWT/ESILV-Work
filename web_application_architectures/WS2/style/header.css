@@ -30,7 +30,7 @@ header.custom-header {
   box-shadow: 0 0 10px #1D92CD;
 }
 
-.linkLBC , .budget{
+.linkLBC , .budget {
   display: inline-block;
   margin-top: 10px;
   position: relative;
@@ -58,8 +58,8 @@ header.custom-header {
 }
 
 .circle-searchButton {
-    width:70%;
-    height: auto;
+    width:80px;
+    height: 80px;
     display: block;
     border-radius: 50%;
     border-width: 0px;
@@ -69,6 +69,11 @@ header.custom-header {
     text-decoration:none;
     background: white;
     box-shadow: 0 6px 6px #1D92CD;
+}
+
+.imageButton {
+  width:60%;
+  height: 60%;
 }
 
 .logo-grid {

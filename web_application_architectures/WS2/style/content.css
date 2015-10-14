@@ -1,13 +1,31 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300, 300italic);
 @import url(https://fonts.googleapis.com/css?family=Pacifico);
+@import url(https://fonts.googleapis.com/css?family=Raleway:200);
 
-.left-panel { float:left }
-.right-panel { float:right }
+.left-panel {
+  width: 30%;
+  margin-left: 5%;
+  float: left;
+}
+.right-panel {
+  width: 30%;
+  margin-right: 5%;
+  float: left;
+}
+
+.argus-panel {
+  float: left;
+  width: 24%;
+  margin-left: 2%;
+  margin-right: 2%;
+  position: relative;
+}
 
 .content-grid {
+  margin: auto;
+  height: 350px;
+  width: 90%;
   padding-top: 30px;
-  padding-left: 70px;
-  padding-right: 70px;
 }
 
 h1 {
@@ -16,10 +34,71 @@ h1 {
   font-weight: bold;
 }
 
+.car-details h4 {
+  font: 300 12px/2.2 'Open Sans';
+  color:   #4C5356;
+  font-weight: bold;
+}
+
+.description-grid {
+  padding-top: 230px;
+  padding-left: 10px;
+  position: absolute;
+}
+
+.argus-detail {
+  display: inline-block;
+  padding: 0px;
+  width: 100%;
+  height: 190px;
+  border-style: solid;
+  background: white;
+  border-color: #E7E8E9;
+  border-width: 1px;
+  position: relative;
+  box-shadow: 0 1px 1px #E7E8E9;
+  margin: 0;
+}
+
+.argus-detail h2 {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font: 300 14px/1.4 'Open Sans';
+  color:   #4C5356;
+  font-weight: bold;
+}
+
+.title-grid {
+  background: #EFEFEF
+}
+
+.argus-detail h1 {
+  color: #4C5356;
+  padding-top: 20px;
+  font: 200 60px/1.4 'Raleway';
+  font-weight: 300;
+  text-align: center;
+}
+
+.image-thumb {
+  width:80px;
+  height: 80px;
+  display: block;
+  margin-top: 10px;
+  margin-left: 35%;
+  margin-right: 35%;
+  border-radius: 50%;
+  border-width: 0px;
+  background: white;
+  box-shadow: 0 6px 6px #9B9D9F;
+}
+
 .car-details {
   padding: 0px;
-  width: 350px;
+  width: 100%;
   height: 350px;
+  margin: 0;
   border-style: solid;
   background: white;
   border-color: #E7E8E9;
@@ -33,6 +112,11 @@ h1 {
   position: absolute;
   display: block;
   max-width:100%;
+}
+
+.image-grid {
+  position: relative;
+  clear:both;
 }
 
 .image-grid h1 {
@@ -58,8 +142,11 @@ h1 {
 
 .graph-detail {
   text-align: center;
-  width: 350px;
-  height: 180px;
+  margin: 0;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 160px;
   border-style: solid;
   background: white;
   border-color: #E7E8E9;
