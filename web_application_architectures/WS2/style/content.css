@@ -1,0 +1,68 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300, 300italic);
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+
+.left-panel { float:left }
+.right-panel { float:right }
+
+.content-grid {
+  padding-top: 30px;
+  padding-left: 70px;
+  padding-right: 70px;
+}
+
+h1 {
+  font: 300 14px/1.4 'Open Sans';
+  color:   #4C5356;
+  font-weight: bold;
+}
+
+.car-details {
+  padding: 0px;
+  width: 350px;
+  height: 350px;
+  border-style: solid;
+  background: white;
+  border-color: #E7E8E9;
+  border-width: 1px;
+  position: relative;
+  box-shadow: 0 1px 1px #E7E8E9;
+}
+
+.imageCar {
+  margin: auto;
+  position: absolute;
+  display: block;
+  max-width:100%;
+}
+
+.image-grid h1 {
+  position: absolute;
+  top: 20px;
+  font-size: 16px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-weight: normal;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #1EAAF1;
+  box-shadow: 0 0 1px #1D92CD;
+  color: white;
+}
+
+.imageGraph {
+  margin: auto;
+  display: block;
+  margin-bottom: 10px;
+  max-width:100%;
+}
+
+.graph-detail {
+  text-align: center;
+  width: 350px;
+  height: 180px;
+  border-style: solid;
+  background: white;
+  border-color: #E7E8E9;
+  border-width: 1px;
+  box-shadow: 0 1px 1px #E7E8E9;
+}

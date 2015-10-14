@@ -14,6 +14,8 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(express.static(path.join(__dirname, 'public')));
+app.use("/style", express.static(__dirname + '/style'));
+app.use("/images", express.static(__dirname + '/images'));
 app.use(cookieParser());
 app.use(session({
   secret: 'TheKeyOfTheDestinyOfSteevenLy',

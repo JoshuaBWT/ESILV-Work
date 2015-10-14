@@ -1,0 +1,130 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300, 300italic);
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+
+* {
+   margin: 0px;
+   padding: 0px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #F4F5F6;
+  display:block;
+  font: 300 16px/1.4 'Open Sans';
+}
+
+label {
+  color:#56BFF4;
+}
+
+header.custom-header {
+  height: 210px;
+  background: #1EAAF1;
+  box-shadow: 0 0 10px #1D92CD;
+}
+
+.linkLBC , .budget{
+  position: relative;
+  display: inline-block;
+  margin-top: 15px;
+}
+
+.custom-form        {
+  width: 65%;
+  margin: 0 auto;
+}
+
+.circle-searchButton {
+    width:80px;
+    height:80px;
+    border-radius: 50%;
+    border-width: 0px;
+    color:black;
+    text-align:center;
+    text-decoration:none;
+    background: white;
+    box-shadow: 0 6px 6px #1D92CD;
+}
+
+.logo-grid {
+  width: 50%;
+  top: 0px;
+  margin: auto;
+  text-align: center;
+}
+
+.logo h1, .slogan h1{
+  color: white;
+  font-size: 14px;
+}
+
+.logo h1{
+  padding-top: 10px;
+  color: white;
+  font: 300 40px/1.4 'Pacifico';
+}
+
+.slogan h1{
+  color: white;
+  padding-top: 10px;
+  font: 300 18px/1.4 'Open Sans';
+  font-style: italic;
+}
+
+input         {
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  background-color: #1EAAF1;
+  color:white;
+  font: 300 22px/1.4 'Open Sans';
+  width:350px;
+  border:none;
+  border-bottom:1px solid #56BFF4;
+}
+input:focus     { outline:none; }
+
+
+* LABEL ======================================= */
+label          {
+  color:#56BFF4;
+  font: 300 14px/1.4 'Raleway';
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label, input:focus ~ label     {
+  top:-20px;
+  font-size:16px;
+  color:white;
+}
+
+/* BOTTOM BARS ================================= */
+.bar  { position:relative; display:block; width:365px; }
+.bar:before, .bar:after   {
+content:'';
+height:1px;
+width:0;
+bottom:1px;
+position:absolute;
+background:white;
+transition:0.2s ease all;
+}
+.bar:before {
+left:50%;
+}
+.bar:after {
+right:50%;
+}
+
+/* active state effet trait blanc */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+width:50%;
+}
