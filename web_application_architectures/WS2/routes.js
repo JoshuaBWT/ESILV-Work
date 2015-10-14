@@ -5,6 +5,16 @@ var utils = importJS("utils/utils.js");
 var leboncoin = require('leboncoin');
 var lacentrale = require('lacentrale');
 
+/*
+var edmunds = require('node-edmunds');
+
+var vehicle_api_key = 'baxaqtjkr9h7z2tmzu3eeufq';
+var client = edmunds.createVehicleClient(vehicle_api_key);
+client.getListOfModelsByMake('Ford', function (result) {
+  console.log(result);
+});
+*/
+
 module.exports = function(app)
 {
   function renderResult(req, res)
@@ -15,9 +25,9 @@ module.exports = function(app)
       data:req.session.lacentraledata});
   }
 
-  function renderMainPage(res)
+  function renderMainPage(req, res)
   {
-    res.render(__dirname + '/index.html');
+    res.render('index.html', {err:req.session.err});
   }
 
   function renderResultsPage(req, res)
@@ -25,7 +35,7 @@ module.exports = function(app)
     var url = req.query.url;
     //Test si le JSON existe déjà et si on a selectionné un page.
     //console.log(req.session);
-    if(req.query.firstQuery)
+    if(req.query.f)
     {
       //req.session.reset();
       req.session.url = url;
@@ -35,28 +45,34 @@ module.exports = function(app)
       req.session.optionsPages = Array();
 
 
-      var oldJson = leboncoin.scrapData(url, function(result)
+      leboncoin.scrapData(url, function(result, errLBC)
       {
         //parse du json récupéré
-        req.session.lbcJSON = utils.convert_leboncoinJSON_into_appJSON(req.session.url, result);
-        lacentrale.getCotesPages(req.session.lbcJSON, function(lacentraleresult)
+        if(!errLBC.haserror)
         {
-           req.session.optionsPages = lacentraleresult;
-           req.session.urlC = req.session.optionsPages[0].url;
+          req.session.lbcJSON = utils.convert_leboncoinJSON_into_appJSON(req.session.url, result);
+          lacentrale.getCotesPages(req.session.lbcJSON, function(lacentraleresult)
+          {
+             req.session.optionsPages = lacentraleresult;
+             req.session.urlC = req.session.optionsPages[0].url;
 
-           var lacentraledata = {};
+             console.log("url : " + req.session.urlC);
 
+             lacentrale.getCoteAndRatings(req.session.urlC, function(cote, graphdata)
+             {
+                req.session.lacentraledata.url = req.session.urlC;
+                req.session.lacentraledata.cote = cote;
+                req.session.lacentraledata.graphdata = graphdata;
 
-           lacentrale.getCoteAndRatings(req.session.urlC, function(cote, graphdata)
-           {
-              req.session.lacentraledata.url = req.session.urlC;
-              req.session.lacentraledata.cote = cote;
-              req.session.lacentraledata.graphdata = graphdata;
-
-              renderResult(req, res);
-           });
-           //renderPage(res, url, lbcJSON, argusData, pages);
-        });
+                renderResult(req, res);
+             });
+             //renderPage(res, url, lbcJSON, argusData, pages);
+          });
+        }
+        else {
+              req.session.err = errLBC;
+              renderMainPage(req, res);
+        }
       });
     }
     else {
@@ -90,7 +106,7 @@ module.exports = function(app)
   app.get('/', function(req, res)
   {
      if(req.query.url == null)
-        renderMainPage(res);
+        renderMainPage(req, res);
     else
         renderResultsPage(req, res)
   });
