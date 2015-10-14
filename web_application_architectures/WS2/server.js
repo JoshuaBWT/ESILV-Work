@@ -18,7 +18,7 @@ app.use("/style", express.static(__dirname + '/style'));
 app.use("/images", express.static(__dirname + '/images'));
 app.use(cookieParser());
 app.use(session({
-  secret: 'TheKeyOfTheDestinyOfSteevenLy',
+  secret: 'TheKeyOfTheDestinyOfSteevenLyDABOOM1234',
   resave: true,
   saveUninitialized: true})
 );
@@ -31,5 +31,5 @@ var server = app.listen(3000, function () {
   var host = server.address().address;
   var port = server.address().port;
 
-  console.log('Example app listening at http://localhost:%s', port);
+  console.log('LeBonArgus app listening at http://localhost:%s', port);
 });

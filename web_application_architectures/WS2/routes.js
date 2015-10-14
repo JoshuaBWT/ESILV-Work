@@ -55,7 +55,7 @@ module.exports = function(app)
              req.session.optionsPages = lacentraleresult;
              req.session.urlC = req.session.optionsPages[0].url;
 
-             console.log("url : " + req.session.urlC);
+             console.log("url pack selectionné : " + req.session.urlC);
 
              lacentrale.getCoteAndRatings(req.session.urlC, function(cote, graphdata)
              {
