@@ -44,7 +44,6 @@ module.exports = function(app)
       req.session.lacentraledata = {};
       req.session.optionsPages = Array();
 
-
       leboncoin.scrapData(url, function(result, errLBC)
       {
         //parse du json récupéré
@@ -79,11 +78,11 @@ module.exports = function(app)
       var selectedOption = req.query.optionChoices;
       req.session.optionsPages.forEach(function(element, index, array)
       {
-        //console.log("Options : %s, (%s,%s)", selectedOption, element.name, element.url);
-        if(element.name == selectedOption)
-        {
-            req.session.urlC = element.url;
-        }
+          //console.log("Options : %s, (%s,%s)", selectedOption, element.name, element.url);
+          if(element.name == selectedOption)
+          {
+              req.session.urlC = element.url;
+          }
       });
 
       console.log("selected choice : %s", req.session.urlC);

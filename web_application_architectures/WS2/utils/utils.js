@@ -30,6 +30,7 @@ function convert_leboncoinJSON_into_appJSON(url, oldJson)
   newJson.year = oldJson.annee;
   newJson.energy = oldJson.nrj;
   newJson.gearbox = oldJson.vitesse;
+  newJson.description = oldJson.description;
 
   return newJson;
 }
