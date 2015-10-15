@@ -1,6 +1,6 @@
 
 //conversion #oklm #psg
-function convert_leboncoinJSON_into_appJSON(url, oldJson)
+function convert_leboncoinJSON_into_appJSON(url, oldJson, brands)
 {
   var newJson = {};
 
@@ -20,7 +20,10 @@ function convert_leboncoinJSON_into_appJSON(url, oldJson)
     newJson.seller.siren = 0;
   }
   newJson.price = oldJson.prix;
-  newJson.city = oldJson.city.replace(/_/g, " ");
+  if(oldJson.city)
+    newJson.city = oldJson.city.replace(/_/g, " ");
+  else
+    newJson.city = "unknown";
   newJson.postal_code = oldJson.cp;
 
   //A CORRIGER POUR LES MARQUES AUX NOMS COMPOSES STYLE ALPHA ROMEO OU MERCEDES CLASSE E
@@ -28,9 +31,27 @@ function convert_leboncoinJSON_into_appJSON(url, oldJson)
   newJson.brand = oldJson.marque.replace(/_/g, "+");
   newJson.model = oldJson.modele.replace(/_/g, "+");
   newJson.year = oldJson.annee;
+  newJson.mileage = oldJson.km;
   newJson.energy = oldJson.nrj;
   newJson.gearbox = oldJson.vitesse;
+  newJson.options = newJson.title
+   .replace(newJson.brand, "")
+   .replace(newJson.model, "")
+   .trim()
+   .replace(/ /g, "+");
   newJson.description = oldJson.description;
+  newJson.imgsrc = oldJson.imgsrc;
+  newJson.brandmodeltostring = brandmodeltostring(newJson);
+  newJson.updatebrandmodeltostring = function()
+  {
+    this.brandmodeltostring = brandmodeltostring(this);
+  }
 
   return newJson;
+}
+
+function brandmodeltostring(f)
+{
+  return f.brand.charAt(0).toUpperCase() + f.brand.slice(1).replace(/\+/g, " ") + " " +
+  f.model.charAt(0).toUpperCase() + f.model.slice(1).replace(/\+/g, " ");
 }

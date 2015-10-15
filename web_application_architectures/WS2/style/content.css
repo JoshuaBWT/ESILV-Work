@@ -112,6 +112,8 @@ h1 {
   position: absolute;
   display: block;
   max-width:100%;
+  height:auto;
+  width:auto;
 }
 
 .image-grid {
@@ -138,6 +140,10 @@ h1 {
   display: block;
   margin-bottom: 10px;
   max-width:100%;
+  /*
+  width:484px;
+  height:150px;
+  */
 }
 
 .graph-detail {

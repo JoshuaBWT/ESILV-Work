@@ -1,6 +1,4 @@
 var path = require('path');
-var importJS = require('import_external_js');
-var utils = importJS("utils/utils.js");
 
 var leboncoin = require('leboncoin');
 var lacentrale = require('lacentrale');
@@ -15,92 +13,112 @@ client.getListOfModelsByMake('Ford', function (result) {
 });
 */
 
-module.exports = function(app)
+function renderResult(req, res)
 {
-  function renderResult(req, res)
-  {
-    res.render('resultsLBC.html', {url:req.session.url,
-      json:req.session.lbcJSON,
-      optionsPages:req.session.optionsPages,
-      data:req.session.lacentraledata});
-  }
+  res.render('results.html', {url:req.session.url,
+    json:req.session.lbcJSON,
+    optionsPages:req.session.optionsPages,
+    data:req.session.lacentraledata});
+}
 
-  function renderMainPage(req, res)
-  {
-    res.render('index.html', {err:req.session.err});
-  }
+function renderMainPage(req, res)
+{
+  res.render('index.html', {err:req.session.err});
+}
 
-  function renderResultsPage(req, res)
+function renderResultsPage(req, res)
+{
+  var url = req.query.url;
+  //Si on charge pour la première fois la page de réponse
+  if(req.query.f || req.session == null)
   {
-    var url = req.query.url;
-    //Test si le JSON existe déjà et si on a selectionné un page.
-    //console.log(req.session);
-    if(req.query.f)
+    //req.session.reset();
+    req.session.url = url;
+    req.session.urlC = "";
+    req.session.lbcJSON = {};
+    req.session.lacentraledata = {};
+    req.session.optionsPages = Array();
+
+    startProcessingRequests(req, res);
+  }
+  //si on choisit de changer les options.
+  else
+  {
+    var selectedOption = req.query.optionChoices;
+    changeRequestOptions(req, res, selectedOption);
+  }
+}
+
+function gatherLaCentraleDataAndRender(req, res, cote, graphdata)
+{
+  //console.log("cote : %s vs prix : %s", cote, req.session.lbcJSON.price);
+  req.session.lacentraledata.url = req.session.urlC;
+  req.session.lacentraledata.cote = cote;
+  req.session.lacentraledata.graphdata = graphdata;
+
+  renderResult(req, res);
+}
+
+function startProcessingRequests(req, res)
+{
+  leboncoin.scrapData(req.session.url, function(result, errLBC)
+  {
+    //parse du json récupéré
+    if(!errLBC.haserror)
     {
-      //req.session.reset();
-      req.session.url = url;
-      req.session.urlC = "";
-      req.session.lbcJSON = {};
-      req.session.lacentraledata = {};
-      req.session.optionsPages = Array();
-
-      leboncoin.scrapData(url, function(result, errLBC)
+      req.session.lbcJSON = result;
+      lacentrale.getCotesPages(req.session.lbcJSON, function(lacentraleresult, parameters)
       {
-        //parse du json récupéré
-        if(!errLBC.haserror)
-        {
-          req.session.lbcJSON = utils.convert_leboncoinJSON_into_appJSON(req.session.url, result);
-          lacentrale.getCotesPages(req.session.lbcJSON, function(lacentraleresult)
-          {
-             req.session.optionsPages = lacentraleresult;
-             req.session.urlC = req.session.optionsPages[0].url;
+         req.session.optionsPages = lacentraleresult.pages;
+         req.session.lbcJSON = parameters;
+         req.session.urlC = req.session.optionsPages[0].url;
 
-             console.log("url pack selectionné : " + req.session.urlC);
+         if(!req.session.lbcJSON.imgsrc || req.session.lbcJSON.imgsrc == "")
+          req.session.lbcJSON.imgsrc = lacentraleresult.imgsrc;
 
-             lacentrale.getCoteAndRatings(req.session.urlC, function(cote, graphdata)
-             {
-                req.session.lacentraledata.url = req.session.urlC;
-                req.session.lacentraledata.cote = cote;
-                req.session.lacentraledata.graphdata = graphdata;
+         console.log("url pack selectionné : " + req.session.urlC);
 
-                renderResult(req, res);
-             });
-             //renderPage(res, url, lbcJSON, argusData, pages);
-          });
-        }
-        else {
-              req.session.err = errLBC;
-              renderMainPage(req, res);
-        }
+         lacentrale.getCoteAndRatings(req.session.urlC, function(cote, graphdata)
+         {
+            gatherLaCentraleDataAndRender(req, res, cote, graphdata);
+         });
+         //renderPage(res, url, lbcJSON, argusData, pages);
       });
     }
     else {
-      var selectedOption = req.query.optionChoices;
-      req.session.optionsPages.forEach(function(element, index, array)
-      {
-          //console.log("Options : %s, (%s,%s)", selectedOption, element.name, element.url);
-          if(element.name == selectedOption)
-          {
-              req.session.urlC = element.url;
-          }
-      });
-
-      console.log("selected choice : %s", req.session.urlC);
-
-      lacentrale.getCoteAndRatings(req.session.urlC, function(cote, graphdata)
-      {
-         req.session.lacentraledata.url = req.session.urlC;
-         req.session.lacentraledata.cote = cote;
-         req.session.lacentraledata.graphdata = graphdata;
-
-         renderResult(req, res);
-      });
+          req.session.err = errLBC;
+          renderMainPage(req, res);
     }
+  });
+}
 
-    //var newJson = utils.convert_leboncoinJSON_into_appJSON(url, oldJson);
-    //console.log(newJson);
+function changeRequestOptions(req, res, selectedOption)
+{
+  //console.log(req.session.lbcJSON);
+  if(!req.session.optionsPages)
+  {
+    renderMainPage(req, res);
+    return;
   }
+  req.session.optionsPages.forEach(function(element, index, array)
+  {
+      //console.log("Options : %s, (%s,%s)", selectedOption, element.name, element.url);
+      if(element.name == selectedOption)
+      {
+          req.session.urlC = element.url;
+      }
+  });
 
+  console.log("selected choice : %s", req.session.urlC);
+
+  lacentrale.getCoteAndRatings(req.session.urlC, function(cote, graphdata)
+  {
+     gatherLaCentraleDataAndRender(req, res, cote, graphdata);
+  });
+}
+
+module.exports = function(app)
+{
   //gestion du get quand on appuie sur le bouton en ayant entré l'url (et eventuellement les options)
   app.get('/', function(req, res)
   {

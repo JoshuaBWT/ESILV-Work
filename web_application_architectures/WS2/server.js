@@ -14,6 +14,8 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(express.static(path.join(__dirname, 'public')));
+app.use("/utils", express.static(__dirname + '/utils'));
+app.use("/views", express.static(__dirname + '/views'));
 app.use("/style", express.static(__dirname + '/style'));
 app.use("/images", express.static(__dirname + '/images'));
 app.use(cookieParser());
@@ -28,7 +30,6 @@ require("./routes")(app);
 
 //allumage du serveur
 var server = app.listen(3000, function () {
-  var host = server.address().address;
   var port = server.address().port;
 
   console.log('LeBonArgus app listening at http://localhost:%s', port);

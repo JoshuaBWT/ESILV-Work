@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+
+<link rel="stylesheet" type="text/css" href="style/header.css"/>
+<link rel="stylesheet" type="text/css" href="style/content.css"/>
+  <meta charset="UTF-8">
+<TITLE>LeBonArgus.fr</TITLE>
+<script src="utils/jquery-1.11.3.min.js"></script>
+<script src="utils/loader.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
+<!-- page resultats -->
+<script type="text/javascript">
+  var lbcJSON = <%- JSON.stringify(json) %>;
+</script>
+</HEAD>
+<BODY>
+<script type="text/javascript">loadResultsPage();</script>
+<div id="resultsTag" class="mainTag">
+
+  <header id="header" class="custom-header">
+  </header>
+
+  <div id="content" class="content-grid">
+    <div class="left-panel">
+      <div class="car-details">
+        <div class="image-grid">
+          <img class="imageCar" src="<%= json.imgsrc %>"/>
+          <h1> <%= json.brandmodeltostring %></h1>
+        </div>
+        <div class="description-grid">
+          <h4>Prix de vente: <%= json.price %> €</h4>
+          <h4>Année-modèle: <%= json.year %></h4>
+          <h4>Kilométrage: <%= json.mileage %> km</h4>
+          <h4>Carburant: <%= json.energy %></h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="argus-panel">
+      <div class="argus-detail">
+        <div class="title-grid">
+          <h2>ARGUS DU VEHICULE</h2>
+        </div>
+        <h1><%= data.cote %> €</h1>
+        <% if(data.cote > json.price) {  %>
+        <img class="image-thumb" src="/images/thumbs-up.png"/>
+         <%  } else { %>
+        <img class="image-thumb" src="/images/thumbs-down.png"/>
+        <% } %>
+
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="graph-detail">
+        <img class="imageGraph" src="<%= data.graphdata %>"/>
+        <h1>CÔTE ARGUS</h1>
+      </div>
+    </div>
+  </div>
+
+  <form method='GET' action='/'>
+    <input type="hidden" name="url" value=<%= url %>/>
+    <select name="optionChoices" onchange="this.form.submit()">
+    <% for(var i=0; i<optionsPages.length; i++) {
+        if(optionsPages[i].url == data.url) { %>
+       <option selected="selected" value="<%=optionsPages[i].name%>"><%= optionsPages[i].name %></option>
+       <% } else { %>
+       <option value="<%=optionsPages[i].name%>"><%= optionsPages[i].name %></option>
+    <% } }%>
+    </select>
+  </form>
+  <!--
+  <div id="results">
+    <p><%= data.cote %><p>
+    <img src=<%= data.graphdata %> width="484px" height="150px"/>
+  </div>
+  -->
+</div>
+</BODY>
+
+
+</HTML>

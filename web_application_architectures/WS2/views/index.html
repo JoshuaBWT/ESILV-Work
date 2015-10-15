@@ -7,8 +7,9 @@
 <link rel="stylesheet" type="text/css" href="style/content.css"/>
   <meta charset="UTF-8">
 <TITLE>LeBonArgus.fr</TITLE>
-<!--<script src="jquery-1.11.3.min.js"></script>-->
-<!--<script src="js/leboncoin.js"></script>-->
+<script src="utils/jquery-1.11.3.min.js"></script>
+<script src="utils/ejs.min.js"></script>
+<script src="utils/loader.js"></script>
 <!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
 <!--
 
@@ -17,86 +18,18 @@ Page de base avec le formulaire pour récupérer l'url
 -->
 </HEAD>
 <BODY>
+<script type="text/javascript">loadStartPage();</script>
 <div id="resultsTag" class="mainTag">
-  <header class="custom-header">
 
-    <div class="logo-grid">
-      <div class="logo">
-        <h1>LebonArgus.fr</h1>
-      </div>
-      <div class="slogan">
-        <h1>Calculez votre argus en copiant votre lien leboncoin.fr</h1>
-      </div>
-    </div>
-
-    <form method="GET" action="/">
-      <div class="custom-form">
-      <div class="linkLBC">
-        <input type="hidden" name="f" value="true" />
-        <input type="text" name="url" required>
-        <!--<input type="submit">
-        http://www.leboncoin.fr/voitures/852693116.htm?ca=12_s
-        -->
-        <span class="highlight"></span>
-        <span class="bar"></span>
-        <label>Copier un lien Leboncoin.fr</label>
-      </div>
-
-
-        <!-- Colored FAB button with ripple -->
-        <div class="button-grid">
-          <button class="circle-searchButton">
-            <img class="imageButton" src="/images/search.png" style="width:70px;height:70px;">
-          </button>
-        </div>
-
-        <div class="budget">
-        <input type="text">
-        <span class="highlight"></span>
-        <span class="bar"></span>
-        <label>Définir un budget max. ? (Optionnel)</label>
-      </div>
-    </div>
-    </form>
-
+  <header id="header" class="custom-header">
   </header>
 
-  <div class="content-grid">
-    <div class="left-panel">
-      <div class="car-details">
-        <div class="image-grid">
-          <img class="imageCar" src="http://ecoloauto.com/wp-content/uploads/Lexus-rx.jpg" />
-          <h1>Lexus RX-100</h1>
-        </div>
-        <div class="description-grid">
-          <h4>Prix de vente:</h4>
-          <h4>Année-modèle:</h4>
-          <h4>Kilométrage:</h4>
-          <h4>Carburant:</h4>
-        </div>
-      </div>
-    </div>
-
-    <div class="argus-panel">
-      <div class="argus-detail">
-        <div class="title-grid">
-          <h2>ARGUS DU VEHICULE</h2>
-        </div>
-        <h1>22500€</h1>
-        <img class="image-thumb" src="/images/thumbs-up.png"/>
-      </div>
-    </div>
-
-    <div class="right-panel">
-      <div class="graph-detail">
-        <img class="imageGraph" src="/images/graph.jpg"/>
-        <h1>CÔTE ARGUS</h1>
-      </div>
-    </div>
+  <div id="content" class="content-grid">
   </div>
 
 </div>
 </BODY>
+
 <% if(err && err.haserror)
 { %>
 <script type="text/javascript" >
