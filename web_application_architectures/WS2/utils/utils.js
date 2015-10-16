@@ -1,6 +1,6 @@
 
 //conversion #oklm #psg
-function convert_leboncoinJSON_into_appJSON(url, oldJson, brands)
+function convert_leboncoinJSON_into_appJSON(url, oldJson)
 {
   var newJson = {};
 
@@ -27,9 +27,9 @@ function convert_leboncoinJSON_into_appJSON(url, oldJson, brands)
   newJson.postal_code = oldJson.cp;
 
   //A CORRIGER POUR LES MARQUES AUX NOMS COMPOSES STYLE ALPHA ROMEO OU MERCEDES CLASSE E
-
   newJson.brand = oldJson.marque.replace(/_/g, "+");
-  newJson.model = oldJson.modele.replace(/_/g, "+");
+  newJson.model = oldJson.modele;
+
   newJson.year = oldJson.annee;
   newJson.mileage = oldJson.km;
   newJson.energy = oldJson.nrj;
@@ -48,6 +48,16 @@ function convert_leboncoinJSON_into_appJSON(url, oldJson, brands)
   }
 
   return newJson;
+}
+
+function particularbrand(oldJson, newJson)
+{
+  var resu = "";
+  if(oldJson.modele.toLowerCase() == "mx_5")
+    resu = "mx5";
+  else
+    resu = oldJson.modele.replace(/_/g, "+");
+  return resu;
 }
 
 function brandmodeltostring(f)

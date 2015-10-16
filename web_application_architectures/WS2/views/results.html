@@ -80,6 +80,10 @@
   -->
 </div>
 </BODY>
-
-
+<% if(err && err.haserror)
+{ %>
+<script type="text/javascript" >
+  alert("<%= err.lbcerror %>");
+</script>
+<% } %>
 </HTML>

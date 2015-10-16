@@ -18,7 +18,8 @@ function renderResult(req, res)
   res.render('results.html', {url:req.session.url,
     json:req.session.lbcJSON,
     optionsPages:req.session.optionsPages,
-    data:req.session.lacentraledata});
+    data:req.session.lacentraledata,
+    err:req.session.err});
 }
 
 function renderMainPage(req, res)
@@ -85,7 +86,9 @@ function startProcessingRequests(req, res)
          //renderPage(res, url, lbcJSON, argusData, pages);
       });
     }
-    else {
+    else
+    {
+          console.log(JSON.stringify(errLBC));
           req.session.err = errLBC;
           renderMainPage(req, res);
     }
