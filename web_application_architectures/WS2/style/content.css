@@ -1,6 +1,25 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300, 300italic);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300, 300italic, 500italic);
 @import url(https://fonts.googleapis.com/css?family=Pacifico);
 @import url(https://fonts.googleapis.com/css?family=Raleway:200);
+
+.defaut-content h1 {
+  font: 500 28px/1.4 'Open Sans';
+  color:   #DDE0E3;
+  font-style: italic;
+}
+
+.defaut-content img {
+  width: 14%;
+  margin-left: 43%;
+  margin-right: 43%;
+}
+
+.defaut-content{
+  text-align: center;
+  padding-top: 70px;
+  width: 95%;
+  margin: 8px;
+}
 
 .left-panel {
   width: 30%;
@@ -158,4 +177,34 @@ h1 {
   border-color: #E7E8E9;
   border-width: 1px;
   box-shadow: 0 1px 1px #E7E8E9;
+}
+
+select {
+  margin:0;
+  padding:0;
+  outline:none;
+  color: white;
+  font-family:inherit;
+}
+
+div.styled-select {
+    overflow:hidden; /* this hides the select's drop button */
+    padding: 2px;
+    margin-top: 70px;
+    margin-left: 10%;
+    margin-right: 10%;
+    width:80%;
+    background: #1EAAF1;
+    border-radius:10px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    border: solid 1px #ccc;
+}
+
+div.styled-select select {
+    width:100%;
+    padding: 8px;
+    background: #1EAAF1;
+    border-radius:10px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    border: solid 0px;
 }

@@ -5,6 +5,7 @@
 
 <link rel="stylesheet" type="text/css" href="style/header.css"/>
 <link rel="stylesheet" type="text/css" href="style/content.css"/>
+<link rel="stylesheet" type="text/css" href="style/animation.css"/>
   <meta charset="UTF-8">
 <TITLE>LeBonArgus.fr</TITLE>
 <script src="utils/jquery-1.11.3.min.js"></script>
@@ -51,6 +52,22 @@
         <% } %>
 
       </div>
+
+      <div class="styled-select">
+        <form method='GET' action='/'>
+          <input type="hidden" name="url" value=<%= url %>/>
+
+          <select name="optionChoices" onchange="this.form.submit()">
+          <% for(var i=0; i<optionsPages.length; i++) {
+              if(optionsPages[i].url == data.url) { %>
+             <option selected="selected" value="<%=optionsPages[i].name%>"><%= optionsPages[i].name %></option>
+             <% } else { %>
+             <option value="<%=optionsPages[i].name%>"><%= optionsPages[i].name %></option>
+          <% } }%>
+          </select>
+
+        </form>
+      </div>
     </div>
 
     <div class="right-panel">
@@ -60,18 +77,6 @@
       </div>
     </div>
   </div>
-
-  <form method='GET' action='/'>
-    <input type="hidden" name="url" value=<%= url %>/>
-    <select name="optionChoices" onchange="this.form.submit()">
-    <% for(var i=0; i<optionsPages.length; i++) {
-        if(optionsPages[i].url == data.url) { %>
-       <option selected="selected" value="<%=optionsPages[i].name%>"><%= optionsPages[i].name %></option>
-       <% } else { %>
-       <option value="<%=optionsPages[i].name%>"><%= optionsPages[i].name %></option>
-    <% } }%>
-    </select>
-  </form>
   <!--
   <div id="results">
     <p><%= data.cote %><p>
