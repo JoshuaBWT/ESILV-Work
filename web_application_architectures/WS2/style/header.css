@@ -6,6 +6,11 @@
    padding: 0px;
 }
 
+.logo-grid a {
+  text-decoration: none;
+}
+
+
 body {
   margin: 0;
   padding: 0;

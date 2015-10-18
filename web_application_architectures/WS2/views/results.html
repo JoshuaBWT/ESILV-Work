@@ -71,29 +71,37 @@
     </div>
 
     <div class="right-panel">
+
       <div class="graph-detail">
         <img class="imageGraph" src="<%= data.graphdata %>"/>
         <h1>CÔTE ARGUS</h1>
       </div>
+
+      <div class="resultlbc-grid">
+        <% if(search && search.length > 0)
+        { for(var i = 0; i < search.length; i++)
+        { %>
+          <a href="<%= search[i].url %>" title="<%= search[i].title %>" target="_blank">
+            <div class="resultlbc-detail">
+
+              <img src="<%= search[i].img %>"></img>
+              <p><%= search[i].title %></p>
+              <h3><%= search[i].price + "€"%></h3>
+
+            </div>
+        <a>
+        <% } }
+        else
+        { %>
+
+          <p>La recherche selon le budget n'a renvoyé aucun resultat!</p>
+
+        <% } %>
+      </div>
+
     </div>
   </div>
-  <div>
-    <% if(search && search.length > 0)
-    { for(var i = 0; i < search.length; i++)
-    { %>
-    <div>
-      <a href="<%= search[i].url %>" title="<%= search[i].title %>" ><%= search[i].title %></a>
-      <p><%= search[i].price %></p>
-      <img src="<%= search[i].img %>"></img>
-    </div>
-    <% } }
-    else
-    { %>
 
-      <p>La recherche selon le budget n'a renvoyé aucun resultat!</p>
-
-    <% } %>
-  </div>
   <!--
   <div id="results">
     <p><%= data.cote %><p>
