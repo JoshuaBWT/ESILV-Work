@@ -68,10 +68,10 @@ function gatherLaCentraleDataAndRender(req, res, cote, graphdata)
 
 function startProcessingRequests(req, res)
 {
-  leboncoin.scrapData(req.session.url, function(result, errLBC)
+  leboncoin.scrapData(req.session.url, function(errLBC, result)
   {
     //parse du json récupéré
-    if(!errLBC.haserror)
+    if(!errLBC || !errLBC.haserror)
     {
       req.session.lbcJSON = result;
       lacentrale.getCotesPages(req.session.lbcJSON,  function(lacentraleresult, parameters)
@@ -150,7 +150,7 @@ module.exports = function(app)
         renderMainPage(req, res);
     else if(req.query.url.indexOf("http://www.leboncoin.fr/") > -1 &&
             req.query.url.indexOf("offres") <= -1)
-        renderResultsPage(req, res)
+            renderResultsPage(req, res)
     else {
         req.session.err = {};
         req.session.err.haserror = true;

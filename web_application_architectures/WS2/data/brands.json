@@ -2,337 +2,337 @@
   "result": [
     {
       "type": "/automotive/company",
-      "id": "/en/audi",
+      "id": "audi",
       "name": "Audi"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/aston_martin",
+      "id": "aston_martin",
       "name": "Aston Martin"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/bmw",
+      "id": "bmw",
       "name": "BMW"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/bugatti",
+      "id": "bugatti",
       "name": "Bugatti"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/birmingham_small_arms_company",
+      "id": "birmingham_small_arms_company",
       "name": "Birmingham Small Arms Company"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/bentley",
+      "id": "bentley",
       "name": "Bentley Motors Limited"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/chrysler",
+      "id": "chrysler",
       "name": "Chrysler Group LLC"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/ford_motor_company",
+      "id": "ford_motor_company",
       "name": "Ford Motor Company"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/ferrari",
+      "id": "ferrari",
       "name": "Ferrari S.p.A."
     },
     {
       "type": "/automotive/company",
-      "id": "/en/general_motors",
+      "id": "general_motors",
       "name": "General Motors"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/holden",
+      "id": "holden",
       "name": "Holden"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/honda",
+      "id": "honda",
       "name": "Honda Motor Company, Ltd"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/koenigsegg",
+      "id": "koenigsegg",
       "name": "Koenigsegg"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/lamborghini",
+      "id": "lamborghini",
       "name": "Lamborghini"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/avtovaz",
+      "id": "avtovaz",
       "name": "Lada"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/land_rover",
+      "id": "land_rover",
       "name": "Land Rover"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/mazda",
+      "id": "mazda",
       "name": "Mazda"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/mercedes-benz",
+      "id": "mercedes-benz",
       "name": "Mercedes-Benz"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/nissan_motors",
+      "id": "nissan_motors",
       "name": "Nissan Motor Co., Ltd."
     },
     {
       "type": "/automotive/company",
-      "id": "/en/opel",
+      "id": "opel",
       "name": "Opel"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/porsche",
+      "id": "porsche",
       "name": "Porsche"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/reo_motor_car_company",
+      "id": "reo_motor_car_company",
       "name": "REO Motor Car Company"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/skoda_auto",
+      "id": "skoda_auto",
       "name": "Škoda Auto"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/toyota_motor_corporation",
+      "id": "toyota_motor_corporation",
       "name": "Toyota"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/volvo",
+      "id": "volvo",
       "name": "AB Volvo"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/volkswagen",
+      "id": "volkswagen",
       "name": "Volkswagen Passenger Cars"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/volkswagen_group",
+      "id": "volkswagen_group",
       "name": "Volkswagen Group"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/alfa_romeo",
+      "id": "alfa_romeo",
       "name": "Alfa Romeo"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/chevrolet",
+      "id": "chevrolet",
       "name": "Chevrolet"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/db",
+      "id": "db",
       "name": "DB"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/hyundai_motor_company",
+      "id": "hyundai_motor_company",
       "name": "Hyundai Motor Company"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/dodge",
+      "id": "dodge",
       "name": "Dodge"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/daimlerchrysler",
+      "id": "daimlerchrysler",
       "name": "Daimler AG"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/fiat",
+      "id": "fiat",
       "name": "Fiat S.p.A."
     },
     {
       "type": "/automotive/company",
-      "id": "/en/british_aerospace",
+      "id": "british_aerospace",
       "name": "British Aerospace"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/citroen",
+      "id": "citroen",
       "name": "Citroën"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/peugeot",
+      "id": "peugeot",
       "name": "Peugeot"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/maserati",
+      "id": "maserati",
       "name": "Maserati"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/cadillac",
+      "id": "cadillac",
       "name": "Cadillac"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/gaz",
+      "id": "gaz",
       "name": "GAZ"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/uaz",
+      "id": "uaz",
       "name": "UAZ"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/paz",
+      "id": "paz",
       "name": "Pavlovo Bus Factory"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/tatra",
+      "id": "tatra",
       "name": "Tatra"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/daf_trucks",
+      "id": "daf_trucks",
       "name": "DAF Trucks"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/abarth",
+      "id": "abarth",
       "name": "Abarth"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/matra",
+      "id": "matra",
       "name": "Matra"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/jowett",
+      "id": "jowett",
       "name": "Jowett"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/acura",
+      "id": "acura",
       "name": "Acura"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/man_ag",
+      "id": "man_ag",
       "name": "MAN SE"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/ac_cars",
+      "id": "ac_cars",
       "name": "AC Cars Group Ltd."
     },
     {
       "type": "/automotive/company",
-      "id": "/en/jaguar",
+      "id": "jaguar",
       "name": "Jaguar Cars"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/rigas_autobusu_fabrika",
+      "id": "rigas_autobusu_fabrika",
       "name": "Riga Autobus Factory"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/white_motor_company",
+      "id": "white_motor_company",
       "name": "White Motor Company"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/saturn_corporation",
+      "id": "saturn_corporation",
       "name": "Saturn Corporation"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/renault",
+      "id": "renault",
       "name": "Renault"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/alpine",
+      "id": "alpine",
       "name": "Alpine"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/facel_vega",
+      "id": "facel_vega",
       "name": "Facel"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/cosworth",
+      "id": "cosworth",
       "name": "Cosworth"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/simca",
+      "id": "simca",
       "name": "Simca"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/seat",
+      "id": "seat",
       "name": "SEAT"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/borgward",
+      "id": "borgward",
       "name": "Borgward"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/bristol_cars",
+      "id": "bristol_cars",
       "name": "Bristol Cars"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/lotus_cars",
+      "id": "lotus_cars",
       "name": "Lotus Cars"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/scuderia_ferrari",
+      "id": "scuderia_ferrari",
       "name": "Scuderia Ferrari"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/de_lorean_motor_company",
+      "id": "de_lorean_motor_company",
       "name": "DeLorean Motor Company"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/mg",
+      "id": "mg",
       "name": "MG Cars"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/piaggio",
+      "id": "piaggio",
       "name": "Piaggio"
     },
     {
@@ -342,132 +342,132 @@
     },
     {
       "type": "/automotive/company",
-      "id": "/en/delaunay-belleville",
+      "id": "delaunay-belleville",
       "name": "Delaunay-Belleville"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/iveco",
+      "id": "iveco",
       "name": "Iveco"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/american_motors",
+      "id": "american_motors",
       "name": "American Motors"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/am_general",
+      "id": "am_general",
       "name": "AM General"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/studebaker",
+      "id": "studebaker",
       "name": "Studebaker"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/vauxhall_motors",
+      "id": "vauxhall_motors",
       "name": "Vauxhall Motors"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/tvr",
+      "id": "tvr",
       "name": "TVR"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/reliant",
+      "id": "reliant",
       "name": "Reliant"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/mitsubishi_motors",
+      "id": "mitsubishi_motors",
       "name": "Mitsubishi Motors"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/kia_motors",
+      "id": "kia_motors",
       "name": "Kia Motors"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/scania_ab",
+      "id": "scania_ab",
       "name": "Scania AB"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/morris_motor_company",
+      "id": "morris_motor_company",
       "name": "Morris Motors"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/blue_bird_corp",
+      "id": "blue_bird_corp",
       "name": "Blue Bird Corporation"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/grumman_aircraft_engineering_corporation",
+      "id": "grumman_aircraft_engineering_corporation",
       "name": "Grumman Aircraft Corporation"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/daihatsu_motor_company",
+      "id": "daihatsu_motor_company",
       "name": "Daihatsu"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/subaru",
+      "id": "subaru",
       "name": "Subaru"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/autobianchi",
+      "id": "autobianchi",
       "name": "Autobianchi"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/willys",
+      "id": "willys",
       "name": "Willys"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/caterham_cars",
+      "id": "caterham_cars",
       "name": "Caterham Cars"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/mg_rover_group",
+      "id": "mg_rover_group",
       "name": "MG Rover Group"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/lancia",
+      "id": "lancia",
       "name": "Lancia"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/locomobile",
+      "id": "locomobile",
       "name": "Locomobile Company of America"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/nash_motors",
+      "id": "nash_motors",
       "name": "Nash Motors"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/pierce-arrow",
+      "id": "pierce-arrow",
       "name": "Pierce-Arrow Motor Car Company"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/daimler_motor_company",
+      "id": "daimler_motor_company",
       "name": "Daimler Company"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/mack_trucks",
+      "id": "mack_trucks",
       "name": "Mack Trucks"
     },
     {
@@ -477,27 +477,27 @@
     },
     {
       "type": "/automotive/company",
-      "id": "/en/british_motor_corporation",
+      "id": "british_motor_corporation",
       "name": "British Motor Corporation"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/kaiser_motors",
+      "id": "kaiser_motors",
       "name": "Kaiser Motors"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/fabrique_nationale_de_herstal",
+      "id": "fabrique_nationale_de_herstal",
       "name": "FN Herstal"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/fuji_heavy_industries",
+      "id": "fuji_heavy_industries",
       "name": "Fuji Heavy Industries"
     },
     {
       "type": "/automotive/company",
-      "id": "/en/allard",
+      "id": "allard",
       "name": "Allard"
     }
   ]
