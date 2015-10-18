@@ -77,17 +77,6 @@
       </div>
     </div>
   </div>
-  <form method='GET' action='/'>
-    <input type="hidden" name="url" value=<%= url %>/>
-    <select name="optionChoices" onchange="this.form.submit()">
-    <% for(var i=0; i<optionsPages.length; i++) {
-        if(optionsPages[i].url == data.url) { %>
-       <option selected="selected" value="<%=optionsPages[i].name%>"><%= optionsPages[i].name %></option>
-       <% } else { %>
-       <option value="<%=optionsPages[i].name%>"><%= optionsPages[i].name %></option>
-    <% } }%>
-    </select>
-  </form>
   <div>
     <% if(search && search.length > 0)
     { for(var i = 0; i < search.length; i++)
