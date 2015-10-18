@@ -25,6 +25,7 @@ function convert_leboncoinJSON_into_appJSON(url, oldJson)
   else
     newJson.city = "unknown";
   newJson.postal_code = oldJson.cp;
+  newJson.region = oldJson.region;
 
   //A CORRIGER POUR LES MARQUES AUX NOMS COMPOSES STYLE ALPHA ROMEO OU MERCEDES CLASSE E
   newJson.brand = oldJson.marque.replace(/_/g, "+").replace(/ /g, "+");

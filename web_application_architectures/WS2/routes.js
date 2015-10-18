@@ -19,6 +19,7 @@ function renderResult(req, res)
     json:req.session.lbcJSON,
     optionsPages:req.session.optionsPages,
     data:req.session.lacentraledata,
+    search:req.session.searchdata,
     err:req.session.err});
 }
 
@@ -40,6 +41,10 @@ function renderResultsPage(req, res)
     req.session.lbcJSON = {};
     req.session.lacentraledata = {};
     req.session.optionsPages = Array();
+    req.session.budget = 0;
+
+    if(req.query.b && req.query.b > 0)
+      req.session.budget = req.query.b;
 
     startProcessingRequests(req, res);
   }
@@ -69,7 +74,7 @@ function startProcessingRequests(req, res)
     if(!errLBC.haserror)
     {
       req.session.lbcJSON = result;
-      lacentrale.getCotesPages(req.session.lbcJSON, function(lacentraleresult, parameters)
+      lacentrale.getCotesPages(req.session.lbcJSON,  function(lacentraleresult, parameters)
       {
          if(!lacentraleresult || !parameters)
          {
@@ -88,9 +93,16 @@ function startProcessingRequests(req, res)
 
          console.log("url pack selectionné : " + req.session.urlC);
 
-         lacentrale.getCoteAndRatings(req.session.urlC, function(cote, graphdata)
+         //faire la recherche preference utilisateur
+         leboncoin.doResearch(req.session.url, req.session.lbcJSON, req.session.budget, function (data)
          {
-            gatherLaCentraleDataAndRender(req, res, cote, graphdata);
+           req.session.searchdata = data;
+           //Obtenir l'argus et le graph pour la selection d'options
+           lacentrale.getCoteAndRatings(req.session.urlC, function(cote, graphdata)
+           {
+              //render de la page
+              gatherLaCentraleDataAndRender(req, res, cote, graphdata);
+           });
          });
          //renderPage(res, url, lbcJSON, argusData, pages);
       });
@@ -136,14 +148,13 @@ module.exports = function(app)
   {
     if(req.query.url == null || req.query.url == "")
         renderMainPage(req, res);
-    else if(req.query.url.indexOf("http://www.leboncoin.fr/voitures") <= -1)
-    {
-      req.session.err = {};
-      req.session.err.haserror = true;
-      req.session.err.errortext = "Url incompatible !";
-      renderMainPage(req, res);
-    }
-    else
+    else if(req.query.url.indexOf("http://www.leboncoin.fr/") > -1)
         renderResultsPage(req, res)
+    else {
+        req.session.err = {};
+        req.session.err.haserror = true;
+        req.session.err.errortext = "recherche erronée!";
+        renderMainPage(req, res);
+    }
   });
 }
