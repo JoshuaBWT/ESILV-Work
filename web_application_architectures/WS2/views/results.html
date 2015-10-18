@@ -77,8 +77,6 @@
       </div>
     </div>
   </div>
-<<<<<<< HEAD
-
   <form method='GET' action='/'>
     <input type="hidden" name="url" value=<%= url %>/>
     <select name="optionChoices" onchange="this.form.submit()">
@@ -90,9 +88,23 @@
     <% } }%>
     </select>
   </form>
-  
-=======
->>>>>>> c031ffd2c28cd685c9a7a67ae95fc75b8d23b19d
+  <div>
+    <% if(search && search.length > 0)
+    { for(var i = 0; i < search.length; i++)
+    { %>
+    <div>
+      <a href="<%= search[i].url %>" title="<%= search[i].title %>" ><%= search[i].title %></a>
+      <p><%= search[i].price %></p>
+      <img src="<%= search[i].img %>"></img>
+    </div>
+    <% } }
+    else
+    { %>
+
+      <p>La recherche selon le budget n'a renvoyé aucun resultat!</p>
+
+    <% } %>
+  </div>
   <!--
   <div id="results">
     <p><%= data.cote %><p>
