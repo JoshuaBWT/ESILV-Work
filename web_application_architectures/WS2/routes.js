@@ -34,6 +34,7 @@ function renderResultsPage(req, res)
   if(req.query.f || req.session == null)
   {
     //req.session.reset();
+    req.session.err = {};
     req.session.url = url;
     req.session.urlC = "";
     req.session.lbcJSON = {};
@@ -74,7 +75,7 @@ function startProcessingRequests(req, res)
          {
           renderMainPage(req, res);
           req.session.err.haserror = true;
-          req.session.err.errortext = "Erreur avec le chargement des données lacentrale!"; 
+          req.session.err.errortext = "Erreur avec le chargement des données lacentrale!";
          }
 
 
@@ -133,8 +134,15 @@ module.exports = function(app)
   //gestion du get quand on appuie sur le bouton en ayant entré l'url (et eventuellement les options)
   app.get('/', function(req, res)
   {
-     if(req.query.url == null)
+    if(req.query.url == null || req.query.url == "")
         renderMainPage(req, res);
+    else if(req.query.url.indexOf("http://www.leboncoin.fr/voitures") <= -1)
+    {
+      req.session.err = {};
+      req.session.err.haserror = true;
+      req.session.err.errortext = "Url incompatible !";
+      renderMainPage(req, res);
+    }
     else
         renderResultsPage(req, res)
   });
