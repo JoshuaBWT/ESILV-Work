@@ -70,6 +70,14 @@ function startProcessingRequests(req, res)
       req.session.lbcJSON = result;
       lacentrale.getCotesPages(req.session.lbcJSON, function(lacentraleresult, parameters)
       {
+         if(!lacentraleresult || !parameters)
+         {
+          renderMainPage(req, res);
+          req.session.err.haserror = true;
+          req.session.err.errortext = "Erreur avec le chargement des données lacentrale!"; 
+         }
+
+
          req.session.optionsPages = lacentraleresult.pages;
          req.session.lbcJSON = parameters;
          req.session.urlC = req.session.optionsPages[0].url;

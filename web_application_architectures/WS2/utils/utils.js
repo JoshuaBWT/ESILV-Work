@@ -27,16 +27,17 @@ function convert_leboncoinJSON_into_appJSON(url, oldJson)
   newJson.postal_code = oldJson.cp;
 
   //A CORRIGER POUR LES MARQUES AUX NOMS COMPOSES STYLE ALPHA ROMEO OU MERCEDES CLASSE E
-  newJson.brand = oldJson.marque.replace(/_/g, "+");
-  newJson.model = oldJson.modele;
+  newJson.brand = oldJson.marque.replace(/_/g, "+").replace(/ /g, "+");
+  newJson.model = particularbrand(oldJson);
+  newJson.model =   newJson.model.replace(/_/g, "+").replace(/ /g, "+");
 
   newJson.year = oldJson.annee;
   newJson.mileage = oldJson.km;
   newJson.energy = oldJson.nrj;
   newJson.gearbox = oldJson.vitesse;
   newJson.options = newJson.title
-   .replace(newJson.brand, "")
-   .replace(newJson.model, "")
+   .replace(newJson.brand.replace(/\+/, " "), "")
+   .replace(newJson.model.replace(/\+/, " "), "")
    .trim()
    .replace(/ /g, "+");
   newJson.description = oldJson.description;
@@ -50,13 +51,15 @@ function convert_leboncoinJSON_into_appJSON(url, oldJson)
   return newJson;
 }
 
-function particularbrand(oldJson, newJson)
+function particularbrand(oldJson)
 {
   var resu = "";
   if(oldJson.modele.toLowerCase() == "mx_5")
     resu = "mx5";
+  else if(oldJson.titre.toLowerCase().indexOf("evoke") > -1 || oldJson.titre.toLowerCase().indexOf("evoque") > -1)
+    resu = "range_rover_evoque";
   else
-    resu = oldJson.modele.replace(/_/g, "+");
+    resu = oldJson.modele.replace(/_/g, "+").replace(/ /g, "+");
   return resu;
 }
 
