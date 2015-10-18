@@ -69,11 +69,26 @@ header.custom-header {
     text-decoration:none;
     background: white;
     box-shadow: 0 6px 6px #1D92CD;
+    -webkit-transition: 10s ease-in-out;
+    -moz-transition: 10s ease-in-out;
+    -o-transition: 10s ease-in-out;
+    transition: 10s ease-in-out;
+    outline: none;
+}
+
+.circle-searchButton:focus {
+    -webkit-transform: rotate(25000deg);
+    -moz-transform: rotate(25000deg);
+    -o-transform: rotate(25000deg);
+    -ms-transform: rotate(25000deg);
+    outline: none;
+    border-width: 0px;
 }
 
 .imageButton {
   width:60%;
   height: 60%;
+  border-width: 0px;
 }
 
 .logo-grid {
