@@ -148,7 +148,8 @@ module.exports = function(app)
   {
     if(req.query.url == null || req.query.url == "")
         renderMainPage(req, res);
-    else if(req.query.url.indexOf("http://www.leboncoin.fr/") > -1)
+    else if(req.query.url.indexOf("http://www.leboncoin.fr/") > -1 &&
+            req.query.url.indexOf("offres") <= -1)
         renderResultsPage(req, res)
     else {
         req.session.err = {};
