@@ -31,9 +31,11 @@ function renderMainPage(req, res)
 function renderResultsPage(req, res)
 {
   var url = req.query.url;
+    if(url[url.length -1] == "/")
+      url = url.substr(0, url.length - 1);
   //Si on charge pour la première fois la page de réponse
-  if(req.query.f || req.session == null)
-  {
+  ///if(req.session == null)
+  //{
     //req.session.reset();
     req.session.err = {};
     req.session.url = url;
@@ -46,27 +48,31 @@ function renderResultsPage(req, res)
     if(req.query.b && req.query.b > 0)
       req.session.budget = req.query.b;
 
-    startProcessingRequests(req, res);
-  }
+    startProcessingRequests(req, res, function()
+    {
+        if(req.query.optionChoices || req.query.optionChoices != "")
+        {
+          var selectedOption = req.query.optionChoices;
+          changeRequestOptions(req, res, selectedOption, function()
+          {
+            renderResult(req, res);
+          });
+        }
+        else {
+          renderResult(req, res);
+        }
+    });
+  //}
   //si on choisit de changer les options.
-  else
-  {
-    var selectedOption = req.query.optionChoices;
-    changeRequestOptions(req, res, selectedOption);
-  }
 }
 
 function gatherLaCentraleDataAndRender(req, res, cote, graphdata)
 {
   //console.log("cote : %s vs prix : %s", cote, req.session.lbcJSON.price);
-  req.session.lacentraledata.url = req.session.urlC;
-  req.session.lacentraledata.cote = cote;
-  req.session.lacentraledata.graphdata = graphdata;
 
-  renderResult(req, res);
 }
 
-function startProcessingRequests(req, res)
+function startProcessingRequests(req, res, callback)
 {
   leboncoin.scrapData(req.session.url, function(errLBC, result)
   {
@@ -78,9 +84,10 @@ function startProcessingRequests(req, res)
       {
          if(!lacentraleresult || !parameters)
          {
-          renderMainPage(req, res);
           req.session.err.haserror = true;
           req.session.err.errortext = "Erreur avec le chargement des données lacentrale!";
+          renderMainPage(req, res);
+          return;
          }
 
 
@@ -101,7 +108,12 @@ function startProcessingRequests(req, res)
            lacentrale.getCoteAndRatings(req.session.urlC, function(cote, graphdata)
            {
               //render de la page
-              gatherLaCentraleDataAndRender(req, res, cote, graphdata);
+              req.session.lacentraledata.url = req.session.urlC;
+              req.session.lacentraledata.cote = cote;
+              req.session.lacentraledata.graphdata = graphdata;
+
+              //renderResult(req, res);
+              callback();
            });
          });
          //renderPage(res, url, lbcJSON, argusData, pages);
@@ -116,7 +128,7 @@ function startProcessingRequests(req, res)
   });
 }
 
-function changeRequestOptions(req, res, selectedOption)
+function changeRequestOptions(req, res, selectedOption, callback)
 {
   //console.log(req.session.lbcJSON);
   if(!req.session.optionsPages)
@@ -137,7 +149,11 @@ function changeRequestOptions(req, res, selectedOption)
 
   lacentrale.getCoteAndRatings(req.session.urlC, function(cote, graphdata)
   {
-     gatherLaCentraleDataAndRender(req, res, cote, graphdata);
+    req.session.lacentraledata.url = req.session.urlC;
+    req.session.lacentraledata.cote = cote;
+    req.session.lacentraledata.graphdata = graphdata;
+
+    callback();
   });
 }
 
