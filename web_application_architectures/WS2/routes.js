@@ -1,7 +1,7 @@
 var path = require('path');
 
-var leboncoin = require('leboncoin');
-var lacentrale = require('lacentrale');
+var leboncoin = require('./lib/leboncoin');
+var lacentrale = require('./lib/lacentrale');
 
 /*
 var edmunds = require('node-edmunds');
@@ -12,6 +12,21 @@ client.getListOfModelsByMake('Ford', function (result) {
   console.log(result);
 });
 */
+function getCoteAndRender(req, res)
+{
+  lacentrale.getCoteAndRatings(req.session.urlC, req.session.lbcJSON, function(cote, graphdata, coteAffine)
+  {
+     //render de la page
+     req.session.lacentraledata.url = req.session.urlC;
+     req.session.lacentraledata.cote = cote;
+     req.session.lacentraledata.graphdata = graphdata;
+     req.session.lacentraledata.coteAffine = coteAffine;
+
+     //renderResult(req, res);
+     renderResult(req, res);
+  });
+}
+
 
 function renderResult(req, res)
 {
@@ -48,19 +63,14 @@ function renderResultsPage(req, res)
     if(req.query.b && req.query.b > 0)
       req.session.budget = req.query.b;
 
-    startProcessingRequests(req, res, function()
+    startProcessingRequests(req, res, function(req)
     {
-        if(req.query.optionChoices || req.query.optionChoices != "")
+        if(req.query.optionChoices && req.query.optionChoices != "")
         {
           var selectedOption = req.query.optionChoices;
-          changeRequestOptions(req, res, selectedOption, function()
-          {
-            renderResult(req, res);
-          });
+          req.session.urlC = changeRequestOptions(req, res, selectedOption);
         }
-        else {
-          renderResult(req, res);
-        }
+        getCoteAndRender(req, res);
     });
   //}
   //si on choisit de changer les options.
@@ -90,7 +100,6 @@ function startProcessingRequests(req, res, callback)
           return;
          }
 
-
          req.session.optionsPages = lacentraleresult.pages;
          req.session.lbcJSON = parameters;
          req.session.urlC = req.session.optionsPages[0].url;
@@ -101,20 +110,19 @@ function startProcessingRequests(req, res, callback)
          console.log("url pack selectionné : " + req.session.urlC);
 
          //faire la recherche preference utilisateur
-         leboncoin.doResearch(req.session.url, req.session.lbcJSON, req.session.budget, function (data)
+         leboncoin.doResearch(req.session.url, req.session.lbcJSON, req.session.budget, function (data, error)
          {
+           if(error)
+           {
+             console.log("Problème recherche");
+             req.session.err = errLBC;
+             renderMainPage(req, res);
+             return;
+           }
+
            req.session.searchdata = data;
            //Obtenir l'argus et le graph pour la selection d'options
-           lacentrale.getCoteAndRatings(req.session.urlC, function(cote, graphdata)
-           {
-              //render de la page
-              req.session.lacentraledata.url = req.session.urlC;
-              req.session.lacentraledata.cote = cote;
-              req.session.lacentraledata.graphdata = graphdata;
-
-              //renderResult(req, res);
-              callback();
-           });
+           callback(req);
          });
          //renderPage(res, url, lbcJSON, argusData, pages);
       });
@@ -128,33 +136,26 @@ function startProcessingRequests(req, res, callback)
   });
 }
 
-function changeRequestOptions(req, res, selectedOption, callback)
+function changeRequestOptions(req, res, selectedOption)
 {
   //console.log(req.session.lbcJSON);
+  var result = "";
   if(!req.session.optionsPages)
   {
     renderMainPage(req, res);
-    return;
+    return null;
   }
   req.session.optionsPages.forEach(function(element, index, array)
   {
       //console.log("Options : %s, (%s,%s)", selectedOption, element.name, element.url);
       if(element.name == selectedOption)
       {
-          req.session.urlC = element.url;
+          console.log("selected choice : %s", element.name, element.url);
+          result = element.url;
+          return(false);
       }
   });
-
-  console.log("selected choice : %s", req.session.urlC);
-
-  lacentrale.getCoteAndRatings(req.session.urlC, function(cote, graphdata)
-  {
-    req.session.lacentraledata.url = req.session.urlC;
-    req.session.lacentraledata.cote = cote;
-    req.session.lacentraledata.graphdata = graphdata;
-
-    callback();
-  });
+  return result;
 }
 
 module.exports = function(app)
