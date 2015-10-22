@@ -68,6 +68,11 @@ function renderResultsPage(req, res, callback)
 
     startProcessingRequests(req, res, function(req)
     {
+        if(req.session.err.haserror)
+        {
+            callback(req, res);
+            return;
+        }
         if(req.query.optionChoices && req.query.optionChoices != "")
         {
           var selectedOption = req.query.optionChoices;
@@ -99,7 +104,7 @@ function startProcessingRequests(req, res, callback)
          {
           req.session.err.haserror = true;
           req.session.err.errortext = "Erreur avec le chargement des données lacentrale!";
-          renderMainPage(req, res);
+          callback(req, res);
           return;
          }
 
@@ -119,7 +124,7 @@ function startProcessingRequests(req, res, callback)
            {
              console.log("Problème recherche");
              req.session.err = errLBC;
-             renderMainPage(req, res);
+             callback(req, res);
              return;
            }
 
@@ -181,11 +186,14 @@ module.exports = function(app)
             req.query.url.indexOf("offres") <= -1)
             renderResultsPage(req, res, function(req, res)
             {
-                renderResult(req, res);
+                if(req.haserror)
+                  renderMainPage(req, res)
+                else
+                  renderResult(req, res);
             });
     else if(req.query.url.indexOf("http://www") <= -1)
     {
-        leboncoin.doResearch(req.query.url, null, "ile_de_france", 34, function(data, error)
+        leboncoin.doResearch(req.query.url, null, "ile_de_france", 8, function(data, error)
         {
            if(error && error.haserror)
            {
@@ -216,7 +224,8 @@ module.exports = function(app)
             req.query.url.indexOf("offres") <= -1)
             renderResultsPage(req, res, function(req, res)
             {
-                console.log(req.session);
+                //console.log(req.session);
+                //console.log("succes ajax call!");
                 renderCellResult(req, res);
             });
     else {

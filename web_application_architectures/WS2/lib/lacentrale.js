@@ -250,10 +250,11 @@ var getCotesPages =  function(parameters, callback)
         }
           var result = {};
           var $ = cheerio.load(body);
-
+          
           //si on arrive directement sur la page contenant la cote
           if(response.request.uri.href == "http://www.lacentrale.fr/lacote_origine.php" ||
-          response.request.uri.href == "http://www.lacentrale.fr/")
+          response.request.uri.href == "http://www.lacentrale.fr/" ||
+          $("html").html().indexOf("Error 42") > -1)
           {
             callback(null, null);
           }

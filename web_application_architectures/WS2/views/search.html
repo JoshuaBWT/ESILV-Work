@@ -27,89 +27,28 @@ Page de base avec le formulaire pour récupérer l'url
 
   <div class="search-content">
     <div class="left-grid">
-      <a href="<%= search[i].url %>" title="<%= search[i].title %>" target="_blank">
-      <div class="grid-1-1">
-          <img src="/images/car.jpg"></img>
-          <p>Titre voiture</p>
-          <h3>23 000€</h3>
-      </div>
-      </a>
-      <a href="<%= search[i].url %>" title="<%= search[i].title %>" target="_blank">
-      <div class="grid-1-2">
-          <img src="/images/car.jpg"></img>
-          <p>Titre voiture</p>
-          <h3>23 000€</h3>
-      </div>
-      </a>
-      <a href="<%= search[i].url %>" title="<%= search[i].title %>" target="_blank">
-      <div class="grid-1-3">
-          <img src="/images/car.jpg"></img>
-          <p>Titre voiture</p>
-          <h3>23 000€</h3>
-      </div>
-      </a>
+
     </div>
     <div class="mid-grid">
-      <a href="<%= search[i].url %>" title="<%= search[i].title %>" target="_blank">
-      <div class="grid-2-1">
-          <img src="/images/car.jpg"></img>
-          <p>Titre voiture</p>
-          <h3>23 000€</h3>
-      </div>
-      </a>
-      <a href="<%= search[i].url %>" title="<%= search[i].title %>" target="_blank">
-      <div class="grid-2-2">
-          <img src="/images/car.jpg"></img>
-          <p>Titre voiture</p>
-          <h3>23 000€</h3>
-      </div>
-      </a>
-      <a href="<%= search[i].url %>" title="<%= search[i].title %>" target="_blank">
-      <div class="grid-2-3">
-          <img src="/images/car.jpg"></img>
-          <p>Titre voiture</p>
-          <h3>23 000€</h3>
-      </div>
-      </a>
+
     </div>
     <div class="right-grid">
-      <a href="<%= search[i].url %>" title="<%= search[i].title %>" target="_blank">
-      <div class="grid-3-1">
-          <img src="/images/car.jpg"></img>
-          <p>Titre voiture</p>
-          <h3>23 000€</h3>
-      </div>
-      </a>
-      <a href="<%= search[i].url %>" title="<%= search[i].title %>" target="_blank">
-      <div class="grid-3-2">
-          <img src="/images/car.jpg"></img>
-          <p>Titre voiture</p>
-          <h3>23 000€</h3>
-      </div>
-      </a>
-      <a href="<%= search[i].url %>" title="<%= search[i].title %>" target="_blank">
-      <div class="grid-3-3">
-          <img src="/images/car.jpg"></img>
-          <p>Titre voiture</p>
-          <h3>23 000€</h3>
-      </div>
-      </a>
+
     </div>
   </div>
 
 </div>
 </BODY>
 
-<% if(err && err.haserror)
-{ %>
-<script type="text/javascript" >
-  alert("<%= err.errortext %>");
-</script>
-<% } %>
 <script id="dynamicLoad" type="text/javascript">
-  $.get( location.origin + "/cell", { url:"<%=data[0].url %>" } )
-      .done(function( data ) {
-  //$("#content").text(data);
-});
+  var index = 0;
+  //alert("<%= data.length %>");
+  <% for(var i = 0; i <  data.length ; i++)
+  { %>
+    $.get( location.origin + "/cell", { url:"<%=data[i].url %>" } )
+        .done(function( data ) {
+    $("[class=left-grid]").append(data);
+    });
+  <% } %>
 </script>
 </HTML>

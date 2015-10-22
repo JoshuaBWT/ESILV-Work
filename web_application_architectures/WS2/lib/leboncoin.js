@@ -214,7 +214,7 @@ function doResearch(query, budget, region, nbr, finalCallback)
    var url = "http://www.leboncoin.fr/voitures/offres/";
    if(region && region != "")
       url += region + "/";
-   else 
+   else
       url+= ""
    url += "?f=a&th=1";
   if(budget && budget != 0)
@@ -252,7 +252,7 @@ function doResearch(query, budget, region, nbr, finalCallback)
         data[index].img = img;
         data[index].price = price;
 
-        if(index >= nbr || index >= divs.length - nbr)
+        if(index >= nbr || index >= divs.length - 2)
         {
             //console.log(data);
             finalCallback(data, error);

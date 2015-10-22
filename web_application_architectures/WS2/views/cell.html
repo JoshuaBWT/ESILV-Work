@@ -1,9 +1,7 @@
-<!-- une cell grid-1-1 -->
-
-<a href="<%= search[i].url %>" title="<%= search[i].title %>" target="_blank">
-<div class="grid-1-1">
-    <img src="/images/car.jpg"></img>
-    <p>Titre voiture</p>
-    <h3>23 000€</h3>
-</div>
+<a href="<%= url %>" title="<%=  json.title %>" target="_blank">
+  <div class="grid-1-1">
+      <img src="<%= json.imgsrc %>"></img>
+      <p><%=  json.title %></p>
+      <h3><%= json.price %> €</h3>
+  </div>
 </a>
