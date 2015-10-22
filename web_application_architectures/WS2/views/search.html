@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+
+<link rel="stylesheet" type="text/css" href="style/header.css"/>
+<link rel="stylesheet" type="text/css" href="style/content.css"/>
+  <meta charset="UTF-8">
+<TITLE>LeBonArgus.fr</TITLE>
+<script src="utils/jquery-1.11.3.min.js"></script>
+<script src="utils/ejs.min.js"></script>
+<script src="utils/loader.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
+<!--
+
+Page de base avec le formulaire pour récupérer l'url
+
+-->
+</HEAD>
+<BODY>
+<script type="text/javascript">loadResultsPage();</script>
+<div id="resultsTag" class="mainTag">
+
+  <header id="header" class="custom-header">
+  </header>
+
+  <div id="content" class="content-grid">
+  </div>
+
+</div>
+</BODY>
+
+<% if(err && err.haserror)
+{ %>
+<script type="text/javascript" >
+  alert("<%= err.errortext %>");
+</script>
+<% } %>
+<script id="dynamicLoad" type="text/javascript">
+  $.get( location.origin + "/cell", { url:"<%=data[0].url %>" } )
+      .done(function( data ) {
+  //$("#content").text(data);
+});
+</script>
+</HTML>

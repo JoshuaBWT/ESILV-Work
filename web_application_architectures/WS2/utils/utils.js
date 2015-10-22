@@ -20,6 +20,7 @@ function convert_leboncoinJSON_into_appJSON(url, oldJson)
     newJson.seller.siren = 0;
   }
   newJson.price = oldJson.prix;
+  newJson.coteAffine = 0;
   if(oldJson.city)
     newJson.city = oldJson.city.replace(/_/g, " ");
   else

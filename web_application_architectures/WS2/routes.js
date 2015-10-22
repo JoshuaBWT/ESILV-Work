@@ -1,7 +1,7 @@
 var path = require('path');
 
-var leboncoin = require('leboncoin');
-var lacentrale = require('lacentrale');
+var leboncoin = require('./lib/leboncoin');
+var lacentrale = require('./lib/lacentrale');
 
 /*
 var edmunds = require('node-edmunds');
@@ -13,6 +13,7 @@ client.getListOfModelsByMake('Ford', function (result) {
 });
 */
 
+
 function renderResult(req, res)
 {
   res.render('results.html', {url:req.session.url,
@@ -23,12 +24,29 @@ function renderResult(req, res)
     err:req.session.err});
 }
 
+function renderSearchPage(req, res)
+{
+    res.render("search.html", {data:req.session.searchData,
+    err:req.session.err});
+}
+
+function renderCellResult(req, res)
+{
+  res.render('cell.html', {url:req.session.url,
+    json:req.session.lbcJSON,
+    optionsPages:req.session.optionsPages,
+    data:req.session.lacentraledata,
+    search:req.session.searchdata,
+    err:req.session.err});
+}
+
+
 function renderMainPage(req, res)
 {
   res.render('index.html', {err:req.session.err});
 }
 
-function renderResultsPage(req, res)
+function renderResultsPage(req, res, callback)
 {
   var url = req.query.url;
     if(url[url.length -1] == "/")
@@ -48,19 +66,14 @@ function renderResultsPage(req, res)
     if(req.query.b && req.query.b > 0)
       req.session.budget = req.query.b;
 
-    startProcessingRequests(req, res, function()
+    startProcessingRequests(req, res, function(req)
     {
-        if(req.query.optionChoices || req.query.optionChoices != "")
+        if(req.query.optionChoices && req.query.optionChoices != "")
         {
           var selectedOption = req.query.optionChoices;
-          changeRequestOptions(req, res, selectedOption, function()
-          {
-            renderResult(req, res);
-          });
+          req.session.urlC = changeRequestOptions(req, res, selectedOption);
         }
-        else {
-          renderResult(req, res);
-        }
+        callback(req, res);
     });
   //}
   //si on choisit de changer les options.
@@ -90,7 +103,6 @@ function startProcessingRequests(req, res, callback)
           return;
          }
 
-
          req.session.optionsPages = lacentraleresult.pages;
          req.session.lbcJSON = parameters;
          req.session.urlC = req.session.optionsPages[0].url;
@@ -98,23 +110,31 @@ function startProcessingRequests(req, res, callback)
          if(!req.session.lbcJSON.imgsrc || req.session.lbcJSON.imgsrc == "")
           req.session.lbcJSON.imgsrc = lacentraleresult.imgsrc;
 
-         console.log("url pack selectionné : " + req.session.urlC);
+         //console.log("url pack selectionné : " + req.session.urlC);
 
          //faire la recherche preference utilisateur
-         leboncoin.doResearch(req.session.url, req.session.lbcJSON, req.session.budget, function (data)
+         leboncoin.doResearchWithUrl(req.session.url, req.session.lbcJSON, req.session.budget, function (data, error)
          {
+           if(error)
+           {
+             console.log("Problème recherche");
+             req.session.err = errLBC;
+             renderMainPage(req, res);
+             return;
+           }
+
            req.session.searchdata = data;
            //Obtenir l'argus et le graph pour la selection d'options
-           lacentrale.getCoteAndRatings(req.session.urlC, function(cote, graphdata)
+           lacentrale.getCoteAndRatings(req.session.urlC, req.session.lbcJSON, function(cote, graphdata, coteAffine)
            {
-              //render de la page
               req.session.lacentraledata.url = req.session.urlC;
               req.session.lacentraledata.cote = cote;
               req.session.lacentraledata.graphdata = graphdata;
+              req.session.lacentraledata.coteAffine = coteAffine;
 
-              //renderResult(req, res);
-              callback();
+              callback(req, res);
            });
+              //render de la page
          });
          //renderPage(res, url, lbcJSON, argusData, pages);
       });
@@ -128,33 +148,26 @@ function startProcessingRequests(req, res, callback)
   });
 }
 
-function changeRequestOptions(req, res, selectedOption, callback)
+function changeRequestOptions(req, res, selectedOption)
 {
   //console.log(req.session.lbcJSON);
+  var result = "";
   if(!req.session.optionsPages)
   {
     renderMainPage(req, res);
-    return;
+    return null;
   }
   req.session.optionsPages.forEach(function(element, index, array)
   {
       //console.log("Options : %s, (%s,%s)", selectedOption, element.name, element.url);
       if(element.name == selectedOption)
       {
-          req.session.urlC = element.url;
+          //console.log("selected choice : %s", element.name, element.url);
+          result = element.url;
+          return(false);
       }
   });
-
-  console.log("selected choice : %s", req.session.urlC);
-
-  lacentrale.getCoteAndRatings(req.session.urlC, function(cote, graphdata)
-  {
-    req.session.lacentraledata.url = req.session.urlC;
-    req.session.lacentraledata.cote = cote;
-    req.session.lacentraledata.graphdata = graphdata;
-
-    callback();
-  });
+  return result;
 }
 
 module.exports = function(app)
@@ -166,7 +179,46 @@ module.exports = function(app)
         renderMainPage(req, res);
     else if(req.query.url.indexOf("http://www.leboncoin.fr/") > -1 &&
             req.query.url.indexOf("offres") <= -1)
-            renderResultsPage(req, res)
+            renderResultsPage(req, res, function(req, res)
+            {
+                renderResult(req, res);
+            });
+    else if(req.query.url.indexOf("http://www") <= -1)
+    {
+        leboncoin.doResearch(req.query.url, null, "ile_de_france", 34, function(data, error)
+        {
+           if(error && error.haserror)
+           {
+              req.session.err = error;
+              renderMainPage(req, res);
+              return;
+           }
+
+           req.session.searchData = data;
+           //console.log(data);
+
+            renderSearchPage(req, res);
+        });
+    }
+    else{
+        req.session.err = {};
+        req.session.err.haserror = true;
+        req.session.err.errortext = "recherche erronée!";
+        renderMainPage(req, res);
+    }
+  });
+
+  app.get('/cell', function(req, res)
+  {
+    if(req.query.url == null || req.query.url == "")
+        renderMainPage(req, res);
+    else if(req.query.url.indexOf("http://www.leboncoin.fr/") > -1 &&
+            req.query.url.indexOf("offres") <= -1)
+            renderResultsPage(req, res, function(req, res)
+            {
+                console.log(req.session);
+                renderCellResult(req, res);
+            });
     else {
         req.session.err = {};
         req.session.err.haserror = true;
