@@ -183,6 +183,9 @@ module.exports = function(app)
   //gestion du get quand on appuie sur le bouton en ayant entré l'url (et eventuellement les options)
   app.get('/', function(req, res)
   {
+    var b = null;
+    if(req.query.b != null && req.query.b != "")
+      b = Number(req.query.b);
     if(req.query.url == null || req.query.url == "")
         renderMainPage(req, res);
     else if(req.query.url.indexOf("http://www.leboncoin.fr/") > -1 &&
@@ -196,7 +199,7 @@ module.exports = function(app)
             });
     else if(req.query.url.indexOf("http://www") <= -1)
     {
-        leboncoin.doResearch(req.query.url, null, "ile_de_france", 8, function(data, error)
+        leboncoin.doResearch(req.query.url, b, "ile_de_france", 8, function(data, error)
         {
            if(error && error.haserror || data.length <= 0)
            {
