@@ -9,7 +9,7 @@ html {
 .search-content {
   margin: auto;
   height: 100%;
-  width: 100%;
+  width: 95%;
   padding-top: 30px;
 }
 
@@ -45,46 +45,42 @@ html {
 }
 
 .grid-1-1, .grid-1-2, .grid-1-3 {
-  height: 26%;
+  height: 90px;
   margin-bottom: 15px;
   border-style: solid;
-  border-color: #C1C4C6;
+  border-color: #E7E8E9;
   border-width: 1px;
-  box-shadow: 0 2px 2px #C1C4C6;
+  box-shadow: 0 2px 2px #E7E8E9;
+  white-space: nowrap;
+  word-wrap: break-word;
 }
 
 .grid-2-1, .grid-2-2, .grid-2-3 {
-  height: 26%;
+  height: 90px;
   margin-bottom: 15px;
   border-style: solid;
-  border-color: #C1C4C6;
+  border-color: #E7E8E9;
   border-width: 1px;
-  box-shadow: 0 2px 2px #C1C4C6;
+  box-shadow: 0 2px 2px #E7E8E9;
+  white-space: nowrap;
+  word-wrap: break-word;
 }
 
 .grid-3-1, .grid-3-2, .grid-3-3 {
-  height: 26%;
+  height: 90px;
   margin-bottom: 15px;
   border-style: solid;
-  border-color: #C1C4C6;
+  border-color: #E7E8E9;
   border-width: 1px;
-  box-shadow: 0 2px 2px #C1C4C6;
+  box-shadow: 0 2px 2px #E7E8E9;
+  white-space: nowrap;
+  word-wrap: break-word;
 }
 
 .grid-1-1 p, .grid-1-2 p, .grid-1-3 p, .grid-2-1 p, .grid-2-2 p, .grid-2-3 p, .grid-3-1 p, .grid-3-2 p, .grid-3-3 p {
-  margin-top: 25px;
-  font: 300 14px/1.4 'Open Sans';
+  font: 300 16px/1.4 'Open Sans';
   color:   #4C5356;
-  font-weight: bold;
-  text-overflow: ellipsis;
-  text-decoration: none;
-}
-
-.grid-1-1 img, .grid-1-2 img, .grid-1-3 img, .grid-2-1 img, .grid-2-2 img, .grid-2-3 img, .grid-3-1 img, .grid-3-2 img, .grid-3-3 img {
-  margin-right: 10px;
-  width: 40%;
-  height: 100%;
-  float: left;
+  font-weight: normal;
 }
 
 .grid-1-1 h3, .grid-1-2 h3, .grid-1-3 h3, .grid-2-1 h3, .grid-2-2 h3, .grid-2-3 h3, .grid-3-1 h3, .grid-3-2 h3, .grid-3-3 h3 {
@@ -93,12 +89,38 @@ html {
   font-weight: 300;
 }
 
-.thumb-img {
-  width:30px;
-  height: 30px;
-  margin-top: 10px;
+.thumb-search-img {
+  width:45px;
+  height: 45px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
   border-radius: 50%;
   border-width: 0px;
   background: white;
   box-shadow: 0 6px 6px #9B9D9F;
+}
+
+.image-background {
+  display: inline-block;
+  height: 100%;
+  width: 35%;
+  background-size: cover;
+}
+
+.grid-content {
+  white-space: pre-line;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow:hidden;
+}
+.search-text {
+  width: 65%;
+  padding-bottom: 30px;
+  white-space: pre-line;
+  white-space: nowrap;
+  overflow:hidden;
+  display: inline-block;
+  position: relative;
 }
