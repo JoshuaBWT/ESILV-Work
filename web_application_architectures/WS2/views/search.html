@@ -62,7 +62,7 @@ Page de base avec le formulaire pour récupérer l'url
 <script id="dynamicLoad" type="text/javascript">
   var index = 0;
   //alert("<%= data.length %>");
-  $(document).ready(function()
+  $(window).load(function()
   {
     <% var length = (data.length >= 9)? 9 : data.length;
     var index = -1;

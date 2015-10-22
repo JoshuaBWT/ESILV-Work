@@ -68,7 +68,7 @@ function resolveUrlIfProblem(url, body, parameters, callback)
       url2 = url;
     }
 
-    console.log("validated url : " + url2);
+    console.log("validated url res: " + url2);
     //Après recherche du model de la voiture dans les modèles disponibles on tombe sur une page du style
     //http://www.lacentrale.fr/cote-voitures-jeep-renegade---suv_4x4.html
     //plus qu'a trouver l'année
@@ -236,7 +236,7 @@ var getCotesPages =  function(parameters, callback)
        var url = "http://www.lacentrale.fr/cote-voitures";
        url += "-" + parameters.brand;
        if(parameters.model != "autres")
-        url += "-" + parameters.model;
+       url += "-" + parameters.model;
        url += "-" + parameters.options;
        url += "-" + parameters.year + "-.html";
 
@@ -273,6 +273,7 @@ var getCotesPages =  function(parameters, callback)
                 if(!nbody || !nparameters || !validatedUrl || (error && error.haserror))
                 {
                   callback(null,null);
+                  return;
                 }
 
                 $ = cheerio.load(nbody);
