@@ -12,20 +12,6 @@ client.getListOfModelsByMake('Ford', function (result) {
   console.log(result);
 });
 */
-function getCoteAndRender(req, res)
-{
-  lacentrale.getCoteAndRatings(req.session.urlC, req.session.lbcJSON, function(cote, graphdata, coteAffine)
-  {
-     //render de la page
-     req.session.lacentraledata.url = req.session.urlC;
-     req.session.lacentraledata.cote = cote;
-     req.session.lacentraledata.graphdata = graphdata;
-     req.session.lacentraledata.coteAffine = coteAffine;
-
-     //renderResult(req, res);
-     renderResult(req, res);
-  });
-}
 
 
 function renderResult(req, res)
@@ -38,12 +24,28 @@ function renderResult(req, res)
     err:req.session.err});
 }
 
+function renderSearchPage(req, res)
+{
+    res.render("search.html", {});
+}
+
+function renderCellResult(req, res)
+{
+  res.render('cell.html', {url:req.session.url,
+    json:req.session.lbcJSON,
+    optionsPages:req.session.optionsPages,
+    data:req.session.lacentraledata,
+    search:req.session.searchdata,
+    err:req.session.err});
+}
+
+
 function renderMainPage(req, res)
 {
   res.render('index.html', {err:req.session.err});
 }
 
-function renderResultsPage(req, res)
+function renderResultsPage(req, res, callback)
 {
   var url = req.query.url;
     if(url[url.length -1] == "/")
@@ -70,7 +72,7 @@ function renderResultsPage(req, res)
           var selectedOption = req.query.optionChoices;
           req.session.urlC = changeRequestOptions(req, res, selectedOption);
         }
-        getCoteAndRender(req, res);
+        callback(req, res);
     });
   //}
   //si on choisit de changer les options.
@@ -110,7 +112,7 @@ function startProcessingRequests(req, res, callback)
          console.log("url pack selectionné : " + req.session.urlC);
 
          //faire la recherche preference utilisateur
-         leboncoin.doResearch(req.session.url, req.session.lbcJSON, req.session.budget, function (data, error)
+         leboncoin.doResearchWithUrl(req.session.url, req.session.lbcJSON, req.session.budget, function (data, error)
          {
            if(error)
            {
@@ -122,7 +124,16 @@ function startProcessingRequests(req, res, callback)
 
            req.session.searchdata = data;
            //Obtenir l'argus et le graph pour la selection d'options
-           callback(req);
+           lacentrale.getCoteAndRatings(req.session.urlC, req.session.lbcJSON, function(cote, graphdata, coteAffine)
+           {
+              req.session.lacentraledata.url = req.session.urlC;
+              req.session.lacentraledata.cote = cote;
+              req.session.lacentraledata.graphdata = graphdata;
+              req.session.lacentraledata.coteAffine = coteAffine;
+
+              callback(req, res);
+           });
+              //render de la page
          });
          //renderPage(res, url, lbcJSON, argusData, pages);
       });
@@ -167,7 +178,42 @@ module.exports = function(app)
         renderMainPage(req, res);
     else if(req.query.url.indexOf("http://www.leboncoin.fr/") > -1 &&
             req.query.url.indexOf("offres") <= -1)
-            renderResultsPage(req, res)
+            renderResultsPage(req, res, function(req, res)
+            {
+                renderResult(req, res);
+            });
+    else if(req.query.url.indexOf("http://www") <= -1)
+    {
+        leboncoin.doResearch(req.query.url, null, "ile_de_france", 34, function(data, error)
+        {
+           if(error && error.haserror)
+           {
+              req.session.err = error;
+              renderMainPage(req, res);
+              return;
+           }
+
+            renderSearchPage(req, res);
+        });
+    }
+    else{
+        req.session.err = {};
+        req.session.err.haserror = true;
+        req.session.err.errortext = "recherche erronée!";
+        renderMainPage(req, res);
+    }
+  });
+
+  app.get('/cell', function(req, res)
+  {
+    if(req.query.url == null || req.query.url == "")
+        renderMainPage(req, res);
+    else if(req.query.url.indexOf("http://www.leboncoin.fr/") > -1 &&
+            req.query.url.indexOf("offres") <= -1)
+            renderResultsPage(req, res, function(req, res)
+            {
+                renderCellResult(req, res);
+            });
     else {
         req.session.err = {};
         req.session.err.haserror = true;

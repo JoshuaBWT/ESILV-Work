@@ -99,155 +99,182 @@ function sendResults(url, err, trueJson, finalCallback)
   finalCallback(err, result);
 }
 
-module.exports =
+
+function scrapData(url, finalCallback)
 {
-    scrapData: function(url, finalCallback)
-    {
-      try {
-          request(url, function(reqErr, response, html){
-           // First we'll check to make sure no errors occurred when making the request
-           if(!reqErr)
-           {
-                  console.log(url);
-                   // Next, we'll utilize the cheerio library on the returned html which will essentially give us jQuery functionality
-                  var $ = cheerio.load(html);
-                  //console.log($("h1").text());
-                  if($("h1").text().indexOf("introuvable") > -1)
-                  {
-                    //console.log("here");
-                    error.haserror = true;
-                    error.errortext = "Annonce désactivée!";
-                    finalCallback(error, null);
-                    return;
-                  }
-                  //Ici on récupère le script contenant les données au format txt.
-                  var stringedData = $("body").children()[0].children[0].data;
+  try {
+      request(url, function(reqErr, response, html){
+       // First we'll check to make sure no errors occurred when making the request
+       if(!reqErr)
+       {
+              console.log(url);
+               // Next, we'll utilize the cheerio library on the returned html which will essentially give us jQuery functionality
+              var $ = cheerio.load(html);
+              //console.log($("h1").text());
+              if($("h1").text().indexOf("introuvable") > -1)
+              {
+                //console.log("here");
+                error.haserror = true;
+                error.errortext = "Annonce désactivée!";
+                finalCallback(error, null);
+                return;
+              }
+              //Ici on récupère le script contenant les données au format txt.
+              var stringedData = $("body").children()[0].children[0].data;
 
-                  //On eleve l'initialisation de la variable
-                  stringedData = stringedData.substr(17, stringedData.length);
-                  //On transforme le texte en JSON
+              //On eleve l'initialisation de la variable
+              stringedData = stringedData.substr(17, stringedData.length);
+              //On transforme le texte en JSON
 
-                  var trueJson = JSON.parse(JSON.stringify(eval("(" + stringedData + ")")));
+              var trueJson = JSON.parse(JSON.stringify(eval("(" + stringedData + ")")));
 
-                  var err = errortesting(url, trueJson);
-                  if(err.haserror)
-                  {
-                    finalCallback(err, null);
-                    return;
-                  }
+              var err = errortesting(url, trueJson);
+              if(err.haserror)
+              {
+                finalCallback(err, null);
+                return;
+              }
 
-                  trueJson.region = $("[class='offre selected'] > a").attr("href").replace("http://www.leboncoin.fr/annonces/offres/", "").replace(/\//g, "");
-                  trueJson.description = $("[itemprop=description]").text();
-                  if(trueJson.nbphoto != '0')
-                  {
-                    trueJson.imgsrc = $("[itemprop=image]")[0].attribs["content"];
-                  }
-                  else {
-                    trueJson.imgsrc = "";
-                  }
-                  //console.log(trueJson.imgsrc);
-                  //si la marque n'est pas spécifiée explicitement sur la page, on galère bien commme il faut
-                  //(donc on a récupéré une liste de toutes les marques de voiture au monde et on va fouiller un peu)
-                    sendResults(url, error, trueJson, finalCallback);
-           }
-           else {
-              //console.log(reqErr);
-              error.haserror = true;
-              error.errortext = reqErr;
-              finalCallback(error,null);
-           }
-         });
-      }
-      catch(e)
-      {
-        error.haserror = true;
-        error.errortext = e;
-        finalCallback(error,null);
-      }
-   },
-   //recherche des liens le bon coin
-   doResearch: function doResearch(offerUrl, parameters, budget, finalCallback)
-   {
-     try
-     {
-     var error = null;
-     if(!budget || budget == 0)
-          budget = parameters.price;
-
-     budget = Number(budget);
-     var data = [];
-     var prix = JSON.parse(fs.readFileSync('./data/lbcPrices.json', 'utf8'));
-     var gammeSup = 0,
-     gammeInf = 0;;
-
-     for(var i = prix.options.length - 1; i >= 0; i--)
-     {
-        if(budget > Number(prix.options[i].value))
-          if(i == prix.options.length - 1)
-          {
-            gammeSup = "42";
-            gammeInf = "41";
-            break;
-          }
-          else {
-              gammeSup = prix.options[i+1].id;
-              gammeInf = prix.options[i].id;
-              break;
-          }
-     }
-
-     var url = "http://www.leboncoin.fr/voitures/offres/";
-     url += parameters.region;
-     url += "/?f=a&th=1";
-     url += "&ps="
-     url += gammeInf;
-     url += "&pe=";
-     url += gammeSup;
-     url += "&q=";
-     url += (parameters.brand + "+" + parameters.model).replace(/_/g, "+").replace(/ /g, "+");
-
-     //console.log(url);
-
-     request({url:url, method:'get'}, function(error, response, html)
-     {
-        var $ = cheerio.load(html);
-        var index = -1;
-
-        var divs = $("[class=list-lbc] > a");
-        if(divs.length > 1)
-        divs.each(function()
-        {
-          var curUrl = $(this).attr("href");
-          if(curUrl == offerUrl)
-            return(true);
-          var title = $(this).attr("title");
-          var img = $(this).find("[class=image-and-nb] > img").attr("src");
-          var price = $(this).find("[class=price]").text().replace("€", "").replace(/ /g, "").replace(/\n/g, "");
-
-          index++;
-          data.push({});
-          data[index].url = curUrl;
-          data[index].title = title;
-          data[index].img = img;
-          data[index].price = price;
-
-          if(index >= 2 || index >= divs.length - 2)
-          {
-              //console.log(data);
-              finalCallback(data, error);
-              return(false);
-          }
-        });
-        else
-          finalCallback(data, error);
-        //finalCallback(data);
+              trueJson.region = $("[class='offre selected'] > a").attr("href").replace("http://www.leboncoin.fr/annonces/offres/", "").replace(/\//g, "");
+              trueJson.description = $("[itemprop=description]").text();
+              if(trueJson.nbphoto != '0')
+              {
+                trueJson.imgsrc = $("[itemprop=image]")[0].attribs["content"];
+              }
+              else {
+                trueJson.imgsrc = "";
+              }
+              //console.log(trueJson.imgsrc);
+              //si la marque n'est pas spécifiée explicitement sur la page, on galère bien commme il faut
+              //(donc on a récupéré une liste de toutes les marques de voiture au monde et on va fouiller un peu)
+                sendResults(url, error, trueJson, finalCallback);
+       }
+       else {
+          //console.log(reqErr);
+          error.haserror = true;
+          error.errortext = reqErr;
+          finalCallback(error,null);
+       }
      });
-     }
-     catch(e)
-     {
-       error.haserror = true;
-       error.errortext = e;
-       finalCallback(null, error);
-     }
+  }
+  catch(e)
+  {
+    error.haserror = true;
+    error.errortext = e;
+    finalCallback(error,null);
+  }
+}
+
+function doResearchWithUrl(offerUrl, parameters, budget, finalCallback)
+{
+ var query = (parameters.brand + "+" + parameters.model).replace(/_/g, "+").replace(/ /g, "+");
+ if(!budget || budget == 0)
+      budget = parameters.price;
+ doResearch(query, budget, parameters.region, 2, function(data, error)
+ {
+   for(var i = 0; i < data.length; i++)
+   {
+      if(data[i].url == offerUrl)
+        data.pop(data[i]);
    }
+   finalCallback(data, error);
+ });
+}
+
+//recherche des liens le bon coin
+function doResearch(query, budget, region, nbr, finalCallback)
+{
+ try
+ {
+   var error = null;
+
+   budget = Number(budget);
+   var data = [];
+   var prix = JSON.parse(fs.readFileSync('./data/lbcPrices.json', 'utf8'));
+   var gammeSup = 0,
+   gammeInf = 0;
+
+   if(budget && budget != 0)
+   for(var i = prix.options.length - 1; i >= 0; i--)
+   {
+      if(budget > Number(prix.options[i].value))
+        if(i == prix.options.length - 1)
+        {
+          gammeSup = "42";
+          gammeInf = "41";
+          break;
+        }
+        else {
+            gammeSup = prix.options[i+1].id;
+            gammeInf = prix.options[i].id;
+            break;
+        }
+   }
+
+   var url = "http://www.leboncoin.fr/voitures/offres/";
+   if(region && region != "")
+      url += region + "/";
+   else 
+      url+= ""
+   url += "?f=a&th=1";
+  if(budget && budget != 0)
+  {
+    url += "&ps="
+    url += gammeInf;
+    url += "&pe=";
+    url += gammeSup;
+  }
+   url += "&q=";
+   url += query;
+
+   //console.log(url);
+
+   request({url:url, method:'get'}, function(error, response, html)
+   {
+      var $ = cheerio.load(html);
+      var index = -1;
+
+      var divs = $("[class=list-lbc] > a");
+      if(divs.length > 1)
+      divs.each(function()
+      {
+        var curUrl = $(this).attr("href");
+        ///if(curUrl == offerUrl)
+        //  return(true);
+        var title = $(this).attr("title");
+        var img = $(this).find("[class=image-and-nb] > img").attr("src");
+        var price = $(this).find("[class=price]").text().replace("€", "").replace(/ /g, "").replace(/\n/g, "");
+
+        index++;
+        data.push({});
+        data[index].url = curUrl;
+        data[index].title = title;
+        data[index].img = img;
+        data[index].price = price;
+
+        if(index >= nbr || index >= divs.length - nbr)
+        {
+            //console.log(data);
+            finalCallback(data, error);
+            return(false);
+        }
+      });
+      else
+        finalCallback(data, error);
+      //finalCallback(data);
+   });
+   }
+   catch(e)
+   {
+     var error = {};
+     error.haserror = true;
+     error.errortext = e;
+     finalCallback(null, error);
+   }
+}
+
+module.exports = {
+  scrapData: scrapData,
+  doResearchWithUrl: doResearchWithUrl,
+  doResearch: doResearch
 }
