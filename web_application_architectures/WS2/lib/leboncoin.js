@@ -40,6 +40,11 @@ function trytogetbrandandmodel(trueJson, callback)
       }
     }
   //trouver le modele de la voiture
+  if(!trueJson.marque)
+  {
+      callback(null);
+     return;
+  }
   var nModels = models.getModels(trueJson.marque.toUpperCase());
 
   for(var i = 0; i < split.length; i++)
@@ -107,7 +112,7 @@ function scrapData(url, finalCallback)
        // First we'll check to make sure no errors occurred when making the request
        if(!reqErr)
        {
-              console.log(url);
+              //console.log(url);
                // Next, we'll utilize the cheerio library on the returned html which will essentially give us jQuery functionality
               var $ = cheerio.load(html);
               //console.log($("h1").text());

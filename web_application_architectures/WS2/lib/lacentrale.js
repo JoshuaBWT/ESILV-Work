@@ -223,7 +223,7 @@ function getCoteAffinee($, json, callback)
             result[i] = Number(result[i]);
             cote = cote + result[i];
         }
-        console.log("cote affinee : " + cote);
+        //console.log("cote affinee : " + cote);
         callback(cote);
     });
 }
@@ -240,7 +240,7 @@ var getCotesPages =  function(parameters, callback)
        url += "-" + parameters.options;
        url += "-" + parameters.year + "-.html";
 
-      console.log("maked url : " + url);
+      //console.log("maked url : " + url);
 
       request({ url:url, method:'GET' },
       function(err, response, body) {
@@ -250,7 +250,7 @@ var getCotesPages =  function(parameters, callback)
         }
           var result = {};
           var $ = cheerio.load(body);
-          
+
           //si on arrive directement sur la page contenant la cote
           if(response.request.uri.href == "http://www.lacentrale.fr/lacote_origine.php" ||
           response.request.uri.href == "http://www.lacentrale.fr/" ||

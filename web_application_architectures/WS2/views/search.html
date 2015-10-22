@@ -27,13 +27,28 @@ Page de base avec le formulaire pour récupérer l'url
 
   <div class="search-content">
     <div class="left-grid">
-
+      <div class="grid-1-1">
+      </div>
+      <div class="grid-1-2">
+      </div>
+      <div class="grid-1-3">
+      </div>
     </div>
     <div class="mid-grid">
-
+      <div class="grid-2-1">
+      </div>
+      <div class="grid-2-2">
+      </div>
+      <div class="grid-2-3">
+      </div>
     </div>
     <div class="right-grid">
-
+      <div class="grid-3-1">
+      </div>
+      <div class="grid-3-2">
+      </div>
+      <div class="grid-3-3">
+      </div>
     </div>
   </div>
 
@@ -43,12 +58,25 @@ Page de base avec le formulaire pour récupérer l'url
 <script id="dynamicLoad" type="text/javascript">
   var index = 0;
   //alert("<%= data.length %>");
-  <% for(var i = 0; i <  data.length ; i++)
-  { %>
-    $.get( location.origin + "/cell", { url:"<%=data[i].url %>" } )
-        .done(function( data ) {
-    $("[class=left-grid]").append(data);
-    });
-  <% } %>
+  $(document).ready(function()
+  {
+    <% var length = (data.length >= 9)? 9 : data.length;
+    var index = -1;
+    if(data.length > 0)
+    for(var i = 0; i < 3 ; i++)
+    for(var j = 0; j < 3; j++ )
+    { if(length - 1 >= index && data.length - 2 >= index) {
+      %>
+      $.get( location.origin + "/cell", { url:"<%=data[++index].url %>" })
+      .done(function(data) {
+        if(data)
+            $("[class=grid-<%=i+1%>-<%=j+1%>]").html(data);
+        else {
+          $("[class=grid-<%=i+1%>-<%=j+1%>]").html("<h3>Offre invalide</h3>");
+
+        }
+      });
+    <% } } %>
+  });
 </script>
 </HTML>

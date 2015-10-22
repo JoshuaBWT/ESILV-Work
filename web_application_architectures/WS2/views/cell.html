@@ -1,13 +1,15 @@
-<div class="grid-1-1">
-<a href="<%= url %>" title="<%=  json.title.toUpperCase() %>" target="_blank">
+<a href="<%= url %>" title="<%= json.title  %>" target="_blank">
   <div class="grid-content">
     <div class="image-background" style="background-image: url(<%= json.imgsrc %>); height: 90px;"></div>
       <!--<img src="<%= json.imgsrc %>"></img>-->
       <div class="search-text">
       <p><%=  json.title %></p>
       <h3><%= json.price %> €</h3>
+      <% if(data.cote > json.price) {  %>
       <img class="thumb-search-img" src="/images/thumbs-up.png"/>
+       <%  } else { %>
+      <img class="thumb-search-img" src="/images/thumbs-down.png"/>
+      <% } %>
     </div>
   </div>
 </a>
-</div>

@@ -32,6 +32,9 @@ function renderSearchPage(req, res)
 
 function renderCellResult(req, res)
 {
+  var fullUrl = req.protocol + '://' + req.get('host') + "/?url=";
+  req.session.url = fullUrl + req.session.url;
+  req.session.lbcJSON.title = req.session.lbcJSON.title.toUpperCase();
   res.render('cell.html', {url:req.session.url,
     json:req.session.lbcJSON,
     optionsPages:req.session.optionsPages,
@@ -148,7 +151,7 @@ function startProcessingRequests(req, res, callback)
     {
           console.log(JSON.stringify(errLBC));
           req.session.err = errLBC;
-          renderMainPage(req, res);
+          callback(req, res);
     }
   });
 }
@@ -195,9 +198,15 @@ module.exports = function(app)
     {
         leboncoin.doResearch(req.query.url, null, "ile_de_france", 8, function(data, error)
         {
-           if(error && error.haserror)
+           if(error && error.haserror || data.length <= 0)
            {
-              req.session.err = error;
+              if(error && error.haserror)
+                req.session.err = error;
+              else {
+                req.session.err = {};
+                req.session.err.haserror = true;
+                req.session.err.errortext = "recherche vide!";
+              }
               renderMainPage(req, res);
               return;
            }
@@ -226,13 +235,17 @@ module.exports = function(app)
             {
                 //console.log(req.session);
                 //console.log("succes ajax call!");
-                renderCellResult(req, res);
+                if(!req.session.err.haserror)
+                  renderCellResult(req, res);
+                else {
+                  res.end();
+                }
             });
     else {
         req.session.err = {};
         req.session.err.haserror = true;
-        req.session.err.errortext = "recherche erronée!";
-        renderMainPage(req, res);
+        //req.session.err.errortext = "recherche erronée!";
+        //renderMainPage(req, res);
     }
   });
 }
