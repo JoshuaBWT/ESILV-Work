@@ -72,6 +72,15 @@ function resolveUrlIfProblem(url, body, parameters, callback)
     //Après recherche du model de la voiture dans les modèles disponibles on tombe sur une page du style
     //http://www.lacentrale.fr/cote-voitures-jeep-renegade---suv_4x4.html
     //plus qu'a trouver l'année
+    if(url2 == null || url2 == "")
+    {
+        var error = {};
+        error.haseror = true;
+        error.errortext = "Impossible de trouver la marque du model";
+        callback(null,null,null,error);
+        return;
+    }
+
     request({ url:url2, method:'GET' },
     function(err, response, body)
     {
@@ -123,14 +132,17 @@ function resolveUrlIfProblem(url, body, parameters, callback)
         function(err, response, body)
         {
           //On renvoie la page de resultats avec les options
-          callback(body, parameters, vUrl);
+          callback(body, parameters, vUrl, null);
         });
     });
   }
   catch(err)
   {
     console.log(err);
-    callback(null, null, null);
+    var error = {};
+    error.haserror = true;
+    error.errortext = err;
+    callback(null, null, null, error);
   }
 }
 
@@ -255,12 +267,11 @@ var getCotesPages =  function(parameters, callback)
           //cette balise existe sur la page de résultats uniquement
           else if($('#TabAnnHomeCote').length === 0)
           {
-            resolveUrlIfProblem(url, body, parameters, function(nbody, nparameters, validatedUrl)
+            resolveUrlIfProblem(url, body, parameters, function(nbody, nparameters, validatedUrl, error)
             {
-                if(!nbody || !nparameters || !validatedUrl)
+                if(!nbody || !nparameters || !validatedUrl || (error && error.haserror))
                 {
-                  callback(null, null);
-                  return;
+                  callback(null,null);
                 }
 
                 $ = cheerio.load(nbody);

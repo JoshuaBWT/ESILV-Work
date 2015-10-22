@@ -26,7 +26,8 @@ function renderResult(req, res)
 
 function renderSearchPage(req, res)
 {
-    res.render("search.html", {});
+    res.render("search.html", {data:req.session.searchData,
+    err:req.session.err});
 }
 
 function renderCellResult(req, res)
@@ -109,7 +110,7 @@ function startProcessingRequests(req, res, callback)
          if(!req.session.lbcJSON.imgsrc || req.session.lbcJSON.imgsrc == "")
           req.session.lbcJSON.imgsrc = lacentraleresult.imgsrc;
 
-         console.log("url pack selectionné : " + req.session.urlC);
+         //console.log("url pack selectionné : " + req.session.urlC);
 
          //faire la recherche preference utilisateur
          leboncoin.doResearchWithUrl(req.session.url, req.session.lbcJSON, req.session.budget, function (data, error)
@@ -161,7 +162,7 @@ function changeRequestOptions(req, res, selectedOption)
       //console.log("Options : %s, (%s,%s)", selectedOption, element.name, element.url);
       if(element.name == selectedOption)
       {
-          console.log("selected choice : %s", element.name, element.url);
+          //console.log("selected choice : %s", element.name, element.url);
           result = element.url;
           return(false);
       }
@@ -193,6 +194,9 @@ module.exports = function(app)
               return;
            }
 
+           req.session.searchData = data;
+           //console.log(data);
+
             renderSearchPage(req, res);
         });
     }
@@ -212,6 +216,7 @@ module.exports = function(app)
             req.query.url.indexOf("offres") <= -1)
             renderResultsPage(req, res, function(req, res)
             {
+                console.log(req.session);
                 renderCellResult(req, res);
             });
     else {
