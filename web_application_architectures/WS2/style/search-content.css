@@ -325,6 +325,39 @@ html {
     animation-delay: 3.5s;
 }
 
+.loading-text {
+  width: auto;
+  position: absolute;
+  left:35%;
+  right:35%;
+  top: 50%;
+}
+
+.loading-text h1 {
+
+  font: 500 28px/1.4 'Open Sans';
+  color:   #DDE0E3;
+  font-style: italic;
+
+  -moz-animation: textAnimation 1s 0.5s forwards;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: ease-in;
+  -moz-animation-duration: 0.5s;
+  -moz-animation-delay: 1s;
+
+  -webkit-animation: textAnimation 1s 0.5s forwards;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-in;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-delay: 1s;
+
+  animation: textAnimation 1s 0.5s forwards;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 0.5s;
+  animation-delay: 1s;
+}
+
 @-moz-keyframes searchAnimation {
     0% {
         -moz-transform: translateY(-40px);
@@ -374,5 +407,35 @@ html {
   }
   to {
     opacity: 1;
+  }
+}
+
+@-moz-keyframes textAnimation {
+    from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    display: none;
+  }
+}
+@-webkit-keyframes textAnimation {
+
+    from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    display: none;
+  }
+}
+@keyframes textAnimation {
+
+    from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    display: none;
   }
 }
