@@ -124,3 +124,52 @@ html {
   display: inline-block;
   position: relative;
 }
+
+
+
+.grid-1-1 {
+    -moz-animation-name: searchAnimation;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: ease-in;
+    -moz-animation-duration: 0.45s;
+
+    -webkit-animation-name: searchAnimation;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-duration: 0.45s;
+
+    animation-name: searchAnimation;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 0.45s;
+}
+
+
+@-moz-keyframes searchAnimation {
+    0% {
+        -moz-transform: translateY(-40px);
+    }
+    100% {
+        -moz-transform: translateY(0);
+        opacity: 1;
+    }
+}
+@-webkit-keyframes searchAnimation {
+    0% {
+        -webkit-transform: translateY(-40px);
+    }
+    100% {
+        -webkit-transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes searchAnimation {
+    0% {
+        transform: translateY(-40px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
