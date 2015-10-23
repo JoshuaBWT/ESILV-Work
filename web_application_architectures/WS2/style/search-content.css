@@ -130,50 +130,6 @@ html {
 .grid-1-1 {
     opacity: 0;
 
-    -moz-animation: searchAnimation 1.5s 0.45s forwards;
-    -moz-animation-iteration-count: 1;
-    -moz-animation-timing-function: ease-in;
-    -moz-animation-duration: 0.45s;
-    -moz-animation-delay: 1.5s;
-
-    -webkit-animation: searchAnimation 1.5s 0.45s forwards;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: ease-in;
-    -webkit-animation-duration: 0.45s;
-    -webkit-animation-delay: 1.5s;
-
-    animation: searchAnimation 1.5s 0.45s forwards;
-    animation-iteration-count: 1;
-    animation-timing-function: ease-in;
-    animation-duration: 0.45s;
-    animation-delay: 1.5s;
-}
-
-.grid-1-2 {
-    opacity: 0;
-
-    -moz-animation: searchAnimation 1.75s 0.45s forwards;
-    -moz-animation-iteration-count: 1;
-    -moz-animation-timing-function: ease-in;
-    -moz-animation-duration: 0.45s;
-    -moz-animation-delay: 1.75s;
-
-    -webkit-animation: searchAnimation 1.75s 0.45s forwards;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: ease-in;
-    -webkit-animation-duration: 0.45s;
-    -webkit-animation-delay: 1.75s;
-
-    animation: searchAnimation 1.75s 0.45s forwards;
-    animation-iteration-count: 1;
-    animation-timing-function: ease-in;
-    animation-duration: 0.45s;
-    animation-delay: 1.75s;
-}
-
-.grid-1-3 {
-    opacity: 0;
-
     -moz-animation: searchAnimation 2s 0.45s forwards;
     -moz-animation-iteration-count: 1;
     -moz-animation-timing-function: ease-in;
@@ -193,7 +149,7 @@ html {
     animation-delay: 2s;
 }
 
-.grid-2-1 {
+.grid-1-2 {
     opacity: 0;
 
     -moz-animation: searchAnimation 2.25s 0.45s forwards;
@@ -215,7 +171,7 @@ html {
     animation-delay: 2.25s;
 }
 
-.grid-2-2 {
+.grid-1-3 {
     opacity: 0;
 
     -moz-animation: searchAnimation 2.5s 0.45s forwards;
@@ -237,7 +193,7 @@ html {
     animation-delay: 2.5s;
 }
 
-.grid-2-3 {
+.grid-2-1 {
     opacity: 0;
 
     -moz-animation: searchAnimation 2.75s 0.45s forwards;
@@ -259,7 +215,7 @@ html {
     animation-delay: 2.75s;
 }
 
-.grid-3-1 {
+.grid-2-2 {
     opacity: 0;
 
     -moz-animation: searchAnimation 3s 0.45s forwards;
@@ -281,7 +237,7 @@ html {
     animation-delay: 3s;
 }
 
-.grid-3-2 {
+.grid-2-3 {
     opacity: 0;
 
     -moz-animation: searchAnimation 3.25s 0.45s forwards;
@@ -303,7 +259,7 @@ html {
     animation-delay: 3.25s;
 }
 
-.grid-3-3 {
+.grid-3-1 {
     opacity: 0;
 
     -moz-animation: searchAnimation 3.5s 0.45s forwards;
@@ -325,6 +281,50 @@ html {
     animation-delay: 3.5s;
 }
 
+.grid-3-2 {
+    opacity: 0;
+
+    -moz-animation: searchAnimation 3.75s 0.45s forwards;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: ease-in;
+    -moz-animation-duration: 0.45s;
+    -moz-animation-delay: 3.75s;
+
+    -webkit-animation: searchAnimation 3.75s 0.45s forwards;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-duration: 0.45s;
+    -webkit-animation-delay: 3.75s;
+
+    animation: searchAnimation 3.75s 0.45s forwards;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 0.45s;
+    animation-delay: 3.75s;
+}
+
+.grid-3-3 {
+    opacity: 0;
+
+    -moz-animation: searchAnimation 4s 0.45s forwards;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: ease-in;
+    -moz-animation-duration: 0.45s;
+    -moz-animation-delay: 4s;
+
+    -webkit-animation: searchAnimation 4s 0.45s forwards;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-duration: 0.45s;
+    -webkit-animation-delay: 4s;
+
+    animation: searchAnimation 4s 0.45s forwards;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 0.45s;
+    animation-delay: 4s;
+}
+
 .loading-text {
   width: auto;
   position: absolute;
@@ -339,23 +339,23 @@ html {
   color:   #DDE0E3;
   font-style: italic;
 
-  -moz-animation: textAnimation 1s 0.5s forwards;
+  -moz-animation: textAnimation 1.5s 0.5s forwards;
   -moz-animation-iteration-count: 1;
   -moz-animation-timing-function: ease-in;
   -moz-animation-duration: 0.5s;
-  -moz-animation-delay: 1s;
+  -moz-animation-delay: 1.5s;
 
-  -webkit-animation: textAnimation 1s 0.5s forwards;
+  -webkit-animation: textAnimation 1.5s 0.5s forwards;
   -webkit-animation-iteration-count: 1;
   -webkit-animation-timing-function: ease-in;
   -webkit-animation-duration: 0.5s;
-  -webkit-animation-delay: 1s;
+  -webkit-animation-delay: 1.5s;
 
-  animation: textAnimation 1s 0.5s forwards;
+  animation: textAnimation 1.5s 0.5s forwards;
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
   animation-duration: 0.5s;
-  animation-delay: 1s;
+  animation-delay: 1.5s;
 }
 
 @-moz-keyframes searchAnimation {

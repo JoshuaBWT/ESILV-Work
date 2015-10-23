@@ -46,8 +46,12 @@
         <div class="title-grid">
           <h2>ARGUS DU VEHICULE</h2>
         </div>
-        <h1><%= data.cote %> €</h1>
-        <% if(data.cote > json.price) {  %>
+        <h5><%= data.cote %> €</h1>
+          <div class="title-grid">
+            <h2>COTE AFFINEE</h2>
+          </div>
+        <h3><%= data.coteAffine %> €</h1>
+        <% if(data.coteAffine > json.price) {  %>
         <img class="image-thumb" src="/images/thumbs-up.png"/>
          <%  } else { %>
         <img class="image-thumb" src="/images/thumbs-down.png"/>

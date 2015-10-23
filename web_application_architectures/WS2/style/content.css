@@ -69,7 +69,7 @@ h1 {
   display: inline-block;
   padding: 0px;
   width: 100%;
-  height: 190px;
+  height: 235px;
   border-style: solid;
   background: white;
   border-color: #E7E8E9;
@@ -92,10 +92,18 @@ h1 {
   background: #EFEFEF
 }
 
-.argus-detail h1 {
+.argus-detail h3 {
   color: #4C5356;
-  padding-top: 20px;
+  padding-top: 5px;
   font: 200 60px/1.4 'Raleway';
+  font-weight: 300;
+  text-align: center;
+}
+
+.argus-detail h5 {
+  color: #4C5356;
+  padding-top: 5px;
+  font: 200 30px/1.4 'Raleway';
   font-weight: 300;
   text-align: center;
 }
@@ -104,7 +112,7 @@ h1 {
   width:80px;
   height: 80px;
   display: block;
-  margin-top: 10px;
+  margin-top: 0px;
   margin-left: 35%;
   margin-right: 35%;
   border-radius: 50%;
