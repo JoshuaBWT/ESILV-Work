@@ -80,8 +80,18 @@ function renderResultsPage(req, res, callback)
         {
           var selectedOption = req.query.optionChoices;
           req.session.urlC = changeRequestOptions(req, res, selectedOption);
+          lacentrale.getCoteAndRatings(req.session.urlC, req.session.lbcJSON, function(cote, graphdata, coteAffine)
+          {
+             req.session.lacentraledata.url = req.session.urlC;
+             req.session.lacentraledata.cote = cote;
+             req.session.lacentraledata.graphdata = graphdata;
+             req.session.lacentraledata.coteAffine = coteAffine;
+
+             callback(req, res);
+          });
+          return;
         }
-        callback(req, res);
+        callback(req, res)
     });
   //}
   //si on choisit de changer les options.
@@ -172,7 +182,6 @@ function changeRequestOptions(req, res, selectedOption)
       {
           //console.log("selected choice : %s", element.name, element.url);
           result = element.url;
-          return(false);
       }
   });
   return result;
@@ -192,8 +201,8 @@ module.exports = function(app)
             req.query.url.indexOf("offres") <= -1)
             renderResultsPage(req, res, function(req, res)
             {
-                if(req.haserror)
-                  renderMainPage(req, res)
+                if(req.session.err.haserror)
+                  renderMainPage(req, res);
                 else
                   renderResult(req, res);
             });
